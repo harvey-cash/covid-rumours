@@ -10,11 +10,6 @@
  * @return {string}
  */
 function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
-
-  // Parse JSON strings
-  var tweets = JSON.parse(tweetsToAnnotate).tweetSample
-  var rumours = JSON.parse(knownRumours)
-
   var description = "Please annotate the following tweets."
 
   // Create form with title
@@ -28,11 +23,26 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
     .setRequireLogin(false)
     .setPublishingSummary(true)
 
+  // Create spreadsheet destination
+  var destination = SpreadsheetApp.create(formName + "_responses")
+  moveFile(destination.getId())
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
+
+  moveFile(form.getId()) // move to shared drive folder
+  writeFormLog(form, formName) // write ID and URLs to sheet
+
+
+  // ~~~ CONSTRUCT QUESTIONS ~~~ //
+  
+  // Parse JSON strings
+  var tweets = JSON.parse(tweetsToAnnotate).tweetSample
+  var rumours = JSON.parse(knownRumours)
+
   // For numeric answer questions
   var numericValidation = FormApp.createTextValidation()
     .setHelpText('Input must be a number between 0 and 100.')
     .requireNumberBetween(0, 100)
-    .build();
+    .build()
   
   // Participant ID number
   var participantNumberQ = form.addTextItem()
@@ -43,20 +53,26 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
 
   // For each tweet, create a new annotation question
   for (let i = 0; i < tweets.length; i++) {
+
+    // New page
+    form.addPageBreakItem()
+      .setTitle("Rumour Identification")
+      .setHelpText("Please annotate which rumour is being discussed in the Tweet text.")
+
     var tweet = tweets[i]
     var question = form.addMultipleChoiceItem();
     
-    question.setTitle('Which rumour does this tweet discuss?')
-    question.setHelpText(tweet.text)
+    question.setTitle(tweet.text)
+    // question.setHelpText('#' + (i+1) + " id: " + tweet.tweetID)
 
     // Get rumour shortlist
     var shortlistedRumours = parseShortlist(tweet, rumours)
 
     // Add text descriptions to question
-    question.setChoiceValues(shortlistedRumours.map(r => { return r.description }))
-
-    // Allow 'other' response
-    question.showOtherOption(true)
+    var choices = shortlistedRumours.map(r => { return r.description })
+    choices.push('Other Rumour Not Listed')
+    choices.push('Does Not Discuss a Rumour')
+    question.setChoiceValues(choices)
 
   }
 
@@ -80,6 +96,50 @@ function parseShortlist(tweet, rumours) {
   }
 
   return shortlist
+}
+
+/**
+ * Move given id to the Forms folder in the shared drive
+ */
+function moveFile(id) {
+  var file = DriveApp.getFileById(id)
+  var annotationFolder = getAnnotationFolder()
+  var formFolder = annotationFolder.getFoldersByName("Forms").next()
+
+  file.moveTo(formFolder)
+}
+
+/**
+ * Returns the annotation root folder in the shared drive
+ * @return {DriveApp.Folder}
+ */
+function getAnnotationFolder() {
+  var sharedDriveID = "0AIwfpJgb62NvUk9PVA"
+  var sharedDriveFolder = DriveApp.getFolderById(Drive.Drives.get(sharedDriveID).id)  
+  return sharedDriveFolder.getFoldersByName("Annotation").next()
+}
+
+/**
+ * Write a record of the created form and response sheet
+ * @param {FormApp.Form} form
+ */
+function writeFormLog(form, name) {
+  var id = form.getId()
+  var url = form.getPublishedUrl()
+  var destID = form.getDestinationId()
+  var responseSheet = SpreadsheetApp.openById(destID)
+  var responseURL = responseSheet.getUrl()
+
+  // Write to sheet
+
+  // Get spreadsheet
+  var annotationFolder = getAnnotationFolder()
+  var sheetID = annotationFolder.getFilesByName("FormIDs").next().getId()
+  var spreadsheet = SpreadsheetApp.openById(sheetID)
+
+  var datetime = new Date().toUTCString()
+
+  spreadsheet.appendRow([datetime, id, name, url, responseURL])
 }
 
 /**
@@ -107,9 +167,9 @@ function testGenerateForm() {
 
   var rumourJSON = JSON.stringify(
     { 
-      '001': {category: 'VACCINE', veracity: true, description: '...'},
-      '008': {category: 'MEDICAL', veracity: false, description: '...'},
-      '015': {category: '5G', veracity: false, description: '...'}      
+      '001': {category: 'VACCINE', veracity: true, description: 'Vaccines cause autism.'},
+      '008': {category: 'MEDICAL', veracity: false, description: 'Drink lots of water and you will be fine.'},
+      '015': {category: '5G', veracity: false, description: '5G towers contribute to the spread of Coronavirus'}      
     }
   )
 
