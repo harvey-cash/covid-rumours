@@ -1,4 +1,8 @@
 
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile("Index")
+}
+
 
 /** 
  * Creates a new Google Form for the provided set of Tweets.
@@ -78,6 +82,8 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
 
   Logger.log('Published URL: ' + form.getPublishedUrl())
   Logger.log('Editor URL: ' + form.getEditUrl())
+
+  return form.getPublishedUrl()
 }
 
 /**
@@ -172,6 +178,9 @@ function testGenerateForm() {
       '015': {category: '5G', veracity: false, description: '5G towers contribute to the spread of Coronavirus'}      
     }
   )
+
+  Logger.log(tweetJSON)
+  Logger.log(rumourJSON)
 
   generateAnnotationForm(name, tweetJSON, rumourJSON)
 }

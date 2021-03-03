@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <h1>Annotation Form Generator</h1>
+    <form>
+      <label for="name">Form Name:</label><br>
+      <textarea id="name" name="name" cols="50" rows="1"></textarea><br>
+      <label for="tweets">Tweets to Annotate:</label><br>
+      <textarea id="tweets" name="tweets" cols="100" rows="10"></textarea><br>
+      <label for="rumours">Known Rumours:</label><br>
+      <textarea id="rumours" name="rumours" cols="100" rows="10"></textarea><br><br>
+      <input id="button" type="button" value="Generate Form"}/>
+    </form>
+    <br>
+    <div id='output'/>
+
+    <script>
+      function onSuccess(response) {
+        console.log(response);
+        document.getElementById('output').innerHTML = response;
+      }
+
+      function onButtonClick() {
+        var formName = document.getElementById("name").value;
+        var tweetsJSON = document.getElementById("tweets").value;
+        var rumoursJSON = document.getElementById("rumours").value;
+
+        var response = google.script.run.withSuccessHandler(onSuccess)
+          .generateAnnotationForm(formName, tweetsJSON, rumoursJSON);
+
+        document.getElementById('output').innerHTML = "Generating...";
+      }
+
+      document.getElementById("button").onclick = function() { onButtonClick() };
+    </script>
+  </body>
+</html>
