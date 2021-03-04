@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <h1>Annotation Form Generator</h1>
+    <p>
+      This webpage is hosted by Google Apps Script for creating and writing Google Drive documents.<br>
+      It writes to the Darwin Project Shared Drive, so you'll need to be signed in with your university Google account.<br>
+      It may ask for permissions.<br>
+      <ul>
+        <li><a href="https://drive.google.com/drive/u/1/folders/1_PW9nsaZ_ff_yP533YNtBKWTlHkr7gkJ" target="_blank">Annotation Project Drive Folder</a></li>
+        <li><a href="https://docs.google.com/spreadsheets/d/1vaf9BNWoa4ofaLukRd2KRh_4bf3mmDZ0MbicEfTlPN8/edit?usp=sharing" target="_blank">Record of Generated Forms</a></li>
+        <li><a href="https://script.google.com/u/1/home/projects/17udPsYNgQRemyAxT6vbmrUysFRAmot3xq-WeMNT-sO9YKfBnxtZtUN9e/edit" target="_blank">Apps Script Project</a></li>
+      </ul>
+    </p>
+    <form>
+      <label for="name">Form Name:</label><br>
+      <textarea id="name" name="name" cols="50" rows="1"></textarea><br>
+      <label for="metaData">MetaData (Optional):</label><br>
+      <textarea id="metaData" name="metaData" cols="100" rows="1"></textarea><br>
+      <label for="tweets">JSON String of Tweets to Annotate:</label><br>
+      <textarea id="tweets" name="tweets" cols="100" rows="8"></textarea><br>
+      <label for="rumours">JSON String of Known Rumours:</label><br>
+      <textarea id="rumours" name="rumours" cols="100" rows="8"></textarea><br><br>
+      <input id="button" type="button" value="Generate Form"}/>
+    </form>
+    <br>
+    <div id='output'/>
+
+    <script>
+      function onSuccess(response) {
+        console.log(response);
+        document.getElementById('output').innerHTML = response;
+      }
+
+      function onButtonClick() {
+        var formName = document.getElementById("name").value;
+        var metaData = document.getElementById("metaData").value;
+        var tweetsJSON = document.getElementById("tweets").value;
+        var rumoursJSON = document.getElementById("rumours").value;
+
+        var response = google.script.run.withSuccessHandler(onSuccess)
+          .generateAnnotationForm(formName, tweetsJSON, rumoursJSON, metaData);
+
+        document.getElementById('output').innerHTML = "Generating...";
+      }
+
+      document.getElementById("button").onclick = function() { onButtonClick() };
+    </script>
+  </body>
+</html>
