@@ -1,4 +1,6 @@
-
+/**
+ * Launches HTML interface
+ */
 function doGet() {
   return HtmlService.createHtmlOutputFromFile("Index")
 }
@@ -14,76 +16,120 @@ function doGet() {
  * @return {string}
  */
 function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
-  var description = "Please annotate the following tweets."
+  // Check that JSONS are formatted correctly
+  if (badlyFormattedParameters(formName, tweetsToAnnotate, knownRumours)) {
+    return "Check that the fields are filled out and the JSON strings are structured correctly!"
+  }
 
-  // Create form with title
-  var form = FormApp.create(formName)
-    .setTitle(formName)
-    .setDescription(description)
-    .setCollectEmail(true)
-    .setProgressBar(true)
-    .setLimitOneResponsePerUser(true)
-    .setAllowResponseEdits(true)
-    .setRequireLogin(false)
-    .setPublishingSummary(true)
+  var description = "This form contains a set of social media posts, ready for annotation. " +
+                    "You will be asked to determine which category a tweet belongs to, " +
+                    "and which COVID-19 rumour it discusses."
 
-  // Create spreadsheet destination
-  var destination = SpreadsheetApp.create(formName + "_responses")
-  moveFile(destination.getId())
-  form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
+  try {
 
-  moveFile(form.getId()) // move to shared drive folder
-  writeFormLog(form, formName) // write ID and URLs to sheet
+    // Create form with title
+    var form = FormApp.create(formName)
+      .setTitle(formName)
+      .setDescription(description)
+      .setCollectEmail(true)
+      .setProgressBar(true)
+      .setLimitOneResponsePerUser(true)
+      .setAllowResponseEdits(true)
+      .setRequireLogin(false)
+      .setPublishingSummary(true)
+
+    // Create spreadsheet destination
+    var destination = SpreadsheetApp.create(formName + "_responses")
+    moveFile(destination.getId())
+    form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
+
+    moveFile(form.getId()) // move to shared drive folder
+    writeFormLog(form, formName) // write ID and URLs to sheet
 
 
-  // ~~~ CONSTRUCT QUESTIONS ~~~ //
-  
-  // Parse JSON strings
-  var tweets = JSON.parse(tweetsToAnnotate).tweetSample
-  var rumours = JSON.parse(knownRumours)
-
-  // For numeric answer questions
-  var numericValidation = FormApp.createTextValidation()
-    .setHelpText('Input must be a number between 0 and 100.')
-    .requireNumberBetween(0, 100)
-    .build()
-  
-  // Participant ID number
-  var participantNumberQ = form.addTextItem()
-    .setTitle('Participant ID')
-    .setHelpText('Your unique participant number, provided when you signed up for the study.')
-    .setRequired(true)
-    .setValidation(numericValidation)
-
-  // For each tweet, create a new annotation question
-  for (let i = 0; i < tweets.length; i++) {
-
-    // New page
-    form.addPageBreakItem()
-      .setTitle("Rumour Identification")
-      .setHelpText("Please annotate which rumour is being discussed in the Tweet text.")
-
-    var tweet = tweets[i]
-    var question = form.addMultipleChoiceItem();
+    // ~~~ CONSTRUCT QUESTIONS ~~~ //
     
-    question.setTitle(tweet.text)
-    // question.setHelpText('#' + (i+1) + " id: " + tweet.tweetID)
+    // Parse JSON strings
+    var tweetsJSON = JSON.parse(tweetsToAnnotate)
+    var rumours = JSON.parse(knownRumours)
 
-    // Get rumour shortlist
-    var shortlistedRumours = parseShortlist(tweet, rumours)
+    // Check tweet array is defined
+    var tweets = tweetsJSON.tweetSample
+    if (tweets == null || tweets == undefined) {
+      return 'Tweets to Annotate doesn\'t contain a root "tweetSample" property!'
+    }
 
-    // Add text descriptions to question
-    var choices = shortlistedRumours.map(r => { return r.description })
-    choices.push('Other Rumour Not Listed')
-    choices.push('Does Not Discuss a Rumour')
-    question.setChoiceValues(choices)
+    // For numeric answer questions
+    var numericValidation = FormApp.createTextValidation()
+      .setHelpText('Input must be a number between 0 and 100.')
+      .requireNumberBetween(0, 100)
+      .build()
+    
+    // Participant ID number
+    var participantNumberQ = form.addTextItem()
+      .setTitle('Participant ID')
+      .setHelpText('Your unique participant number, provided when you signed up for the study.')
+      .setRequired(true)
+      .setValidation(numericValidation)
 
+
+    // ~~~ NEW PAGE FOR EACH TWEET ~~~ //
+
+    // For each tweet, create a new annotation question
+    for (let i = 0; i < tweets.length; i++) {
+      // New page
+      form.addPageBreakItem()
+        .setTitle("Rumour Identification")
+        .setHelpText("Please annotate which rumour is being discussed in the Tweet text.")
+
+      var tweet = tweets[i]
+      var question = form.addMultipleChoiceItem();
+      
+      question.setTitle(tweet.text)
+      // question.setHelpText('#' + (i+1) + " id: " + tweet.tweetID)
+
+      // Get rumour shortlist
+      var shortlistedRumours = parseShortlist(tweet, rumours)
+
+      // Add text descriptions to question
+      var choices = shortlistedRumours.map(r => { return r.description })
+      choices.push('Other: rumour not listed')
+      choices.push('Other: does not discuss a rumour')
+      question.setChoiceValues(choices)
+    }
+  }
+  catch (error) {
+    return error
   }
 
   Logger.log('Published URL: ' + form.getPublishedUrl())
   Logger.log('Editor URL: ' + form.getEditUrl())
 
-  return form.getPublishedUrl()
+  return 'Success! <a href=' + form.getPublishedUrl() + ' target="_blank">View Generated Form</a>'
+}
+
+/**
+ * Returns true if parameters are invalid, else false
+ * @return {bool}
+ */
+function badlyFormattedParameters(formName, tweetsToAnnotate, knownRumours) {
+  // Check exists
+  if (formName == null || formName == undefined || formName == "" ||
+      tweetsToAnnotate == null || tweetsToAnnotate == undefined || tweetsToAnnotate == "" ||
+      knownRumours == null || knownRumours == undefined || knownRumours == "") {
+      return true;
+  }
+
+  // Check JSON parsable
+  try {
+    JSON.parse(tweetsToAnnotate)
+    JSON.parse(knownRumours)
+  }
+  catch (ex) {
+    return true
+  }
+
+  return false;
 }
 
 /**
