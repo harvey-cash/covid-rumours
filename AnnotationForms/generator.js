@@ -15,7 +15,7 @@ function doGet() {
  * @param {string} knownRumours
  * @return {string}
  */
-function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
+function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaData) {
   // Check that JSONS are formatted correctly
   if (badlyFormattedParameters(formName, tweetsToAnnotate, knownRumours)) {
     return "Check that the fields are filled out and the JSON strings are structured correctly!"
@@ -44,20 +44,10 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
     form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
 
     moveFile(form.getId()) // move to shared drive folder
-    writeFormLog(form, formName) // write ID and URLs to sheet
+    writeFormLog(form, formName, metaData) // write ID and URLs to sheet
 
 
     // ~~~ CONSTRUCT QUESTIONS ~~~ //
-    
-    // Parse JSON strings
-    var tweetsJSON = JSON.parse(tweetsToAnnotate)
-    var rumours = JSON.parse(knownRumours)
-
-    // Check tweet array is defined
-    var tweets = tweetsJSON.tweetSample
-    if (tweets == null || tweets == undefined) {
-      return 'Tweets to Annotate doesn\'t contain a root "tweetSample" property!'
-    }
 
     // For numeric answer questions
     var numericValidation = FormApp.createTextValidation()
@@ -72,6 +62,9 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
       .setRequired(true)
       .setValidation(numericValidation)
 
+    // Parse JSON strings
+    var tweets = JSON.parse(tweetsToAnnotate).tweetSample
+    var rumours = JSON.parse(knownRumours)
 
     // ~~~ NEW PAGE FOR EACH TWEET ~~~ //
 
@@ -79,27 +72,58 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours) {
     for (let i = 0; i < tweets.length; i++) {
       // New page
       form.addPageBreakItem()
-        .setTitle("Rumour Identification")
-        .setHelpText("Please annotate which rumour is being discussed in the Tweet text.")
+        .setTitle("Tweet #" + (i+1))
 
       var tweet = tweets[i]
-      var question = form.addMultipleChoiceItem();
-      
-      question.setTitle(tweet.text)
-      // question.setHelpText('#' + (i+1) + " id: " + tweet.tweetID)
+
+      // ~~~ Category annotation ~~~ //
+
+      var categoryHeader = form.addSectionHeaderItem()
+      categoryHeader.setTitle(tweet.text)
+
+      var categoryQuestion = form.addMultipleChoiceItem();
+      categoryQuestion.setTitle("Tweet #" + (i+1) + ": Category")
+      categoryQuestion.setHelpText("Which category does this Tweet primarily belong to?")
+
+      var categories = [
+        "Public Authority",
+        "Community",
+        "Medical Advice",
+        "Prominent Actors",
+        "Conspiracy",
+        "Virus Transmission",
+        "Virus Origin",
+        "Civil Unrest",
+        "Vaccine",
+        "Other"
+      ]
+
+      categoryQuestion.setChoiceValues(categories);
+
+      // ~~~ Rumour identification ~~~ //      
+
+      var rumourHeader = form.addSectionHeaderItem()
+      rumourHeader.setTitle(tweet.text)
+
+      var rumourQuestion = form.addMultipleChoiceItem();      
+      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Rumour Identification")
+      rumourQuestion.setHelpText("Which rumour does this Tweet primarily discuss?")
 
       // Get rumour shortlist
+      // ToDo: Filter rumour shortlist based on annotated category?
       var shortlistedRumours = parseShortlist(tweet, rumours)
 
-      // Add text descriptions to question
+      // Add rumour descriptions as response choices
       var choices = shortlistedRumours.map(r => { return r.description })
       choices.push('Other: rumour not listed')
       choices.push('Other: does not discuss a rumour')
-      question.setChoiceValues(choices)
+
+      rumourQuestion.setChoiceValues(choices)
     }
   }
   catch (error) {
-    return error
+    Logger.log(error)
+    return error.toString()
   }
 
   Logger.log('Published URL: ' + form.getPublishedUrl())
@@ -122,10 +146,18 @@ function badlyFormattedParameters(formName, tweetsToAnnotate, knownRumours) {
 
   // Check JSON parsable
   try {
-    JSON.parse(tweetsToAnnotate)
-    JSON.parse(knownRumours)
+    JSON.parse(knownRumours)    
+    var tweetsJSON = JSON.parse(tweetsToAnnotate)
+    
+    // Check tweet array is defined
+    var tweets = tweetsJSON.tweetSample
+    if (tweets == null || tweets == undefined) {
+      // Tweets to Annotate doesn't contain a root "tweetSample" property!
+      return true
+    }
   }
   catch (ex) {
+    // Something went wrong!
     return true
   }
 
@@ -175,7 +207,7 @@ function getAnnotationFolder() {
  * Write a record of the created form and response sheet
  * @param {FormApp.Form} form
  */
-function writeFormLog(form, name) {
+function writeFormLog(form, name, metaData) {
   var id = form.getId()
   var url = form.getPublishedUrl()
   var destID = form.getDestinationId()
@@ -186,12 +218,12 @@ function writeFormLog(form, name) {
 
   // Get spreadsheet
   var annotationFolder = getAnnotationFolder()
-  var sheetID = annotationFolder.getFilesByName("FormIDs").next().getId()
+  var sheetID = annotationFolder.getFilesByName("Forms Record").next().getId()
   var spreadsheet = SpreadsheetApp.openById(sheetID)
 
   var datetime = new Date().toUTCString()
 
-  spreadsheet.appendRow([datetime, id, name, url, responseURL])
+  spreadsheet.appendRow([datetime, id, name, url, responseURL, metaData])
 }
 
 /**
@@ -199,6 +231,7 @@ function writeFormLog(form, name) {
  */
 function testGenerateForm() {
   var name = "Annotation Test Form"
+  var metaData = ""
 
   var tweetJSON = JSON.stringify(
     { 
@@ -228,5 +261,6 @@ function testGenerateForm() {
   Logger.log(tweetJSON)
   Logger.log(rumourJSON)
 
-  generateAnnotationForm(name, tweetJSON, rumourJSON)
+  var response = generateAnnotationForm(name, tweetJSON, rumourJSON, metaData)
+  Logger.log(response)
 }
