@@ -23,7 +23,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
   var description = "This form contains a set of social media posts, ready for annotation. " +
                     "You will be asked to determine which category a tweet belongs to, " +
-                    "and which COVID-19 rumour it discusses."
+                    "and which COVID-19 claim it discusses."
 
   try {
 
@@ -106,8 +106,8 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       rumourHeader.setTitle(tweet.text)
 
       var rumourQuestion = form.addMultipleChoiceItem();      
-      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Rumour Identification")
-      rumourQuestion.setHelpText("Which rumour does this Tweet primarily discuss?")
+      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Claim Identification")
+      rumourQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
 
       // Get rumour shortlist
       // ToDo: Filter rumour shortlist based on annotated category?
@@ -115,8 +115,8 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
       // Add rumour descriptions as response choices
       var choices = shortlistedRumours.map(r => { return r.description })
-      choices.push('Other: rumour not listed')
-      choices.push('Other: does not discuss a rumour')
+      choices.push('Other: claim not listed')
+      choices.push('Other: does not discuss a claim')
 
       rumourQuestion.setChoiceValues(choices)
     }
