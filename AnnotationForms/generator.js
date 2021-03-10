@@ -40,10 +40,12 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
     // Create spreadsheet destination
     var destination = SpreadsheetApp.create(formName + "_responses")
-    moveFile(destination.getId())
     form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
 
-    moveFile(form.getId()) // move to shared drive folder
+    // move to shared drive folder
+    moveFile(form.getId())    
+    moveFile(destination.getId())
+
     writeFormLog(form, formName, metaData) // write ID and URLs to sheet
 
 
@@ -65,6 +67,9 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
     // Parse JSON strings
     var tweets = JSON.parse(tweetsToAnnotate).tweetSample
     var rumours = JSON.parse(knownRumours)
+
+    // Write Tweet IDs to destination spreadsheet
+    // writeResponseColumnHeaders(destination, tweets)
 
     // ~~~ NEW PAGE FOR EACH TWEET ~~~ //
 
@@ -130,6 +135,24 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
   Logger.log('Editor URL: ' + form.getEditUrl())
 
   return 'Success! <a href=' + form.getPublishedUrl() + ' target="_blank">View Generated Form</a>'
+}
+
+/**
+ * DOESN'T SEEM TO OVERWRITE HEADER CORRECTLY. JUST SOLVE IN PARSER?
+ * Overwrite the question title with info more useful for parsing
+ * @param {SpreadsheetApp.Spreadsheet} destination
+ * @param {Object[]} tweets
+ */
+function writeResponseColumnHeaders(destination, tweets) {
+  var tweetIDs = tweets.map(tweet => { return tweet.tweetID })
+  var columnHeaders = []
+  for (let i = 0; i < tweetIDs.length; i++) {
+    columnHeaders.push("category " + tweetIDs[i])
+    columnHeaders.push("claim " + tweetIDs[i])
+  }
+
+  destination.getSheetByName("Form Responses 1").getRange(2, 4, 1, columnHeaders.length)
+    .setValues([columnHeaders])
 }
 
 /**
