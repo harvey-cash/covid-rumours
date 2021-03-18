@@ -39,7 +39,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       .setPublishingSummary(true)
 
     // Create spreadsheet destination
-    var destination = SpreadsheetApp.create(formName + "_responses")
+    var destination = SpreadsheetApp.create(formName + "_" + form.getId() + "_responses")
     form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
 
     // move to shared drive folder
@@ -75,11 +75,11 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
     // For each tweet, create a new annotation question
     for (let i = 0; i < tweets.length; i++) {
+      var tweet = tweets[i]
+
       // New page
       form.addPageBreakItem()
-        .setTitle("Tweet #" + (i+1))
-
-      var tweet = tweets[i]
+        .setTitle("Tweet #" + tweet.numericID)
 
       // ~~~ Category annotation ~~~ //
 
@@ -87,7 +87,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       categoryHeader.setTitle(tweet.text)
 
       var categoryQuestion = form.addMultipleChoiceItem();
-      categoryQuestion.setTitle("Tweet #" + (i+1) + ": Category")
+      categoryQuestion.setTitle("Tweet #" + tweet.numericID + ": Category")
       categoryQuestion.setHelpText("Which category does this Tweet primarily belong to?")
 
       var categories = [
@@ -111,7 +111,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       rumourHeader.setTitle(tweet.text)
 
       var rumourQuestion = form.addMultipleChoiceItem();      
-      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Claim Identification")
+      rumourQuestion.setTitle("Tweet #" + tweet.numericID + ": Claim Identification")
       rumourQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
 
       // Get rumour shortlist
@@ -119,9 +119,9 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       var shortlistedRumours = parseShortlist(tweet, rumours)
 
       // Add rumour descriptions as response choices
-      var choices = shortlistedRumours.map(r => { return r.description })
-      choices.push('Other: claim not listed')
-      choices.push('Other: does not discuss a claim')
+      var choices = shortlistedRumours.map(r => { return "Claim #" + r.rumourID + ": " + r.description })
+      choices.push('Other: Claim not listed')
+      choices.push('Other: Does not discuss a claim')
 
       rumourQuestion.setChoiceValues(choices)
     }
@@ -142,7 +142,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
  * Overwrite the question title with info more useful for parsing
  * @param {SpreadsheetApp.Spreadsheet} destination
  * @param {Object[]} tweets
- */
+ * 
 function writeResponseColumnHeaders(destination, tweets) {
   var tweetIDs = tweets.map(tweet => { return tweet.tweetID })
   var columnHeaders = []
@@ -154,6 +154,7 @@ function writeResponseColumnHeaders(destination, tweets) {
   destination.getSheetByName("Form Responses 1").getRange(2, 4, 1, columnHeaders.length)
     .setValues([columnHeaders])
 }
+*/
 
 /**
  * Returns true if parameters are invalid, else false
@@ -195,8 +196,9 @@ function parseShortlist(tweet, rumours) {
 
   // For each rumour in the shortlist...
   var shortlistedIDs = tweet.rumourShortlist
-  for (let i = 0; i < shortlistedIDs.length; i++) {      
-    var rumour = rumours[shortlistedIDs[i]]; // Find the entry of the rumour
+  for (let i = 0; i < shortlistedIDs.length; i++) {    
+    var rumourIDString = shortlistedIDs[i].toString()  
+    var rumour = rumours[rumourIDString]; // Find the entry of the rumour
 
     // If a rumour in the set is present in the shortlist, add it to the question
     if (rumour != null) { shortlist.push(rumour) }
@@ -260,14 +262,16 @@ function testGenerateForm() {
     { 
       tweetSample: [
         { 
-          tweetID: 'gioshwsejh32hg39', 
+          tweetID: 'gioshwsejh32hg39',
+          numericID: 1,
           text: 'covid is not as bad as normal flu #plandemic',
-          rumourShortlist: [ '001', '008', '016', '080' ]
+          rumourShortlist: [ 1, 8, 16, 80 ]
         },
         {
           tweetID: 'q1tusehjsehj9oi3g23', 
+          numericID: 2,
           text: '@user drinking bleach cures covid',
-          rumourShortlist: [ '015', '008', '100', '211' ]
+          rumourShortlist: [ 15, 8, 100, 211 ]
         }
       ]
     }
@@ -275,9 +279,9 @@ function testGenerateForm() {
 
   var rumourJSON = JSON.stringify(
     { 
-      '001': {category: 'VACCINE', veracity: true, description: 'Vaccines cause autism.'},
-      '008': {category: 'MEDICAL', veracity: false, description: 'Drink lots of water and you will be fine.'},
-      '015': {category: '5G', veracity: false, description: '5G towers contribute to the spread of Coronavirus'}      
+      '1': {rumourID: 1, category: 'VACCINE', veracity: "FALSE", description: 'Vaccines cause autism.'},
+      '8': {rumourID: 8, category: 'MEDICAL', veracity: "FALSE", description: 'Drink lots of water and you will be fine.'},
+      '15': {rumourID: 15, category: '5G', veracity: "FALSE", description: '5G towers contribute to the spread of Coronavirus'}      
     }
   )
 

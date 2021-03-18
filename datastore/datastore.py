@@ -44,7 +44,31 @@ def store_tweet(tweet_json_string):
     tweet["numericID"] = numeric_id  # Add numeric id to tweet dictionary
 
     # Write tweet to store and return success
-    tweet_store[tweet_id] = str(tweet)
+    tweet_store[tweet_id] = tweet
+    write_tweet_store(tweet_store)
+
+    return "Success!"
+
+
+def add_annotations(numeric_id, annotations_dict):
+    """
+    Adds the given set of annotations to the tweet of the given id in the store
+    :param numeric_id: integer id for the tweet in the store
+    :param annotations_dict: annotations of form { participantID, category, veracity, rumour, etc. }
+    :return:
+    """
+    # ToDo: Ensure annotations_dict is formatted correctly
+
+    # Lookup tweet ID
+    tweet_id = lookup_tweet_id(numeric_id)
+    if tweet_id is None:
+        return "Tweet with numeric ID {} not found in datastore id lookup!".format(numeric_id)
+
+    tweet_store = load_tweet_store()
+
+    # Add annotations to tweet in store
+    tweet_store[tweet_id]["annotations"] = tweet_store[tweet_id].get("annotations", []) + [annotations_dict]
+
     write_tweet_store(tweet_store)
 
     return "Success!"

@@ -1,1 +1,1 @@
-{"test_store_tweet": "{'tweetID': 'test_store_tweet', 'text': '#plandemic!', 'numericID': 1}"}
+{"testID": {"numericID": 1, "text": "this is a test tweet store", "annotations": [{"participantID": 0, "category": "MEDICAL", "veracity": "TRUE", "rumourID": 0}]}, "test_store_tweet": {"tweetID": "test_store_tweet", "text": "#plandemic!", "numericID": 2}}
