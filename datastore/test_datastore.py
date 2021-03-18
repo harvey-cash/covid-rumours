@@ -33,23 +33,62 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual("Success!", response)
 
     def test_annotation_parser(self):
-        file_path = "../../Annotations/Annotation Test Form_11SK8qCyvDyrrZfT8Hk6P4Er8yBPLpDgTXN4id6hpg6I_responses - Form Responses 1.csv"
-        expected = [{
-            "participantID": 1,
-            "annotations": [
-                {"numericTweetID": 1, "category": "Virus Transmission", "rumourID": None},
-                {"numericTweetID": 2, "category": "Medical Advice", "rumourID": 15}
-            ]
-        }]
-        self.assertEqual(expected, annotation_parser.load_annotation_csv(file_path))
+        file_path = "../../Annotations/Annotation Test Form_11SK8qCyvDyrrZfT8Hk6P4Er8yBPLpDgTXN4id6hpg6I_responses - Form Responses 1.tsv"
+        expected = [
+            {
+                "participantID": 1,
+                "annotations": [
+                    {"numericTweetID": 112, "category": "Virus Transmission", "rumourID": "Other: Claim not listed"},
+                    {"numericTweetID": 201, "category": "Medical Advice", "rumourID": 15}
+                ]
+            },
+            {
+                "participantID": 10,
+                "annotations": [
+                    {"numericTweetID": 201, "category": "Medical Advice", "rumourID": 101}
+                ]
+            },
+            {
+                "participantID": 12,
+                "annotations": [
+                    {"numericTweetID": 112, "category": "Virus Transmission", "rumourID": 3}
+                ]
+            }
+        ]
+        self.assertEqual(expected, annotation_parser.load_annotation_file(file_path))
+
+    def test_load_files(self):
+        result = annotation_parser.load_annotation_files()
+        expected = [[
+            {
+                "participantID": 1,
+                "annotations": [
+                    {"numericTweetID": 112, "category": "Virus Transmission", "rumourID": "Other: Claim not listed"},
+                    {"numericTweetID": 201, "category": "Medical Advice", "rumourID": 15}
+                ]
+            },
+            {
+                "participantID": 10,
+                "annotations": [
+                    {"numericTweetID": 201, "category": "Medical Advice", "rumourID": 101}
+                ]
+            },
+            {
+                "participantID": 12,
+                "annotations": [
+                    {"numericTweetID": 112, "category": "Virus Transmission", "rumourID": 3}
+                ]
+            }
+        ]]
+        self.assertEqual(expected, result)
 
     def test_parse_header(self):
-        header = "Timestamp,Email Address,Participant ID,Tweet #200: Category,Tweet #200: Claim Identification,Tweet #11: Category,Tweet #11: Claim Identification"
+        header = "Timestamp\tEmail Address\tParticipant ID\tTweet #200: Category\tTweet #200: Claim Identification\tTweet #11: Category\tTweet #11: Claim Identification"
         result = annotation_parser.parse_header_string(header)
         self.assertEqual([200, 11], result)
 
     def test_parse_line(self):
-        line = "3/18/2021 6:25:48,harveycash@live.co.uk,1,Virus Transmission,Other: Claim not listed,Medical Advice,Claim #15: 5G towers contribute to the spread of Coronavirus"
+        line = "3/18/2021 6:25:48\t\t1\tVirus Transmission\tOther: Claim not listed\tMedical Advice\tClaim #15: 5G towers contribute to the spread of Coronavirus"
         result = annotation_parser.parse_line(line)
         expected = (1, [("Virus Transmission", "Other: Claim not listed"), ("Medical Advice", 15)])
         self.assertEqual(expected, result)
