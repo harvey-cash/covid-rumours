@@ -5,7 +5,7 @@ This script is responsible for the specifics of parsing the Google Forms respons
 into JSONs that can be added to the datastore
 """
 
-NON_TWEET_QUESTIONS = 3  # Number of non-tweet questions (Timestamp, Email Address, Participant ID)
+NON_TWEET_QUESTIONS = 2  # Number of non-tweet questions (Timestamp, Email Address, Participant ID)
 DELIMITER = '\t'  # TSV
 
 

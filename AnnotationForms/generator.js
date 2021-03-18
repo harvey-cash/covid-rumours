@@ -31,7 +31,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
     var form = FormApp.create(formName)
       .setTitle(formName)
       .setDescription(description)
-      .setCollectEmail(true)
+      .setCollectEmail(false)
       .setProgressBar(true)
       .setLimitOneResponsePerUser(true)
       .setAllowResponseEdits(true)
@@ -66,6 +66,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
     // Parse JSON strings
     var tweets = JSON.parse(tweetsToAnnotate).tweetSample
+    knownRumours = knownRumours.replace('\t', ' ') // Replace tab characters, so later they don't interfere when downloading TSV
     var rumours = JSON.parse(knownRumours)
 
     // Write Tweet IDs to destination spreadsheet
@@ -280,8 +281,8 @@ function testGenerateForm() {
   var rumourJSON = JSON.stringify(
     { 
       '1': {rumourID: 1, category: 'VACCINE', veracity: "FALSE", description: 'Vaccines cause autism.'},
-      '8': {rumourID: 8, category: 'MEDICAL', veracity: "FALSE", description: 'Drink lots of water and you will be fine.'},
-      '15': {rumourID: 15, category: '5G', veracity: "FALSE", description: '5G towers contribute to the spread of Coronavirus'}      
+      '8': {rumourID: 8, category: 'MEDICAL', veracity: "FALSE", description: 'Drink  lots of water and you will be fine.'},
+      '15': {rumourID: 15, category: '5G', veracity: "FALSE", description: '5G towers\tcontribute to the spread of Coronavirus'}      
     }
   )
 
