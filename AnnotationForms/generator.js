@@ -43,8 +43,8 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
     form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
 
     // move to shared drive folder
-    moveFile(form.getId())    
-    moveFile(destination.getId())
+    moveFile(form.getId(), 'Forms')    
+    moveFile(destination.getId(), 'Responses')
 
     writeFormLog(form, formName, metaData) // write ID and URLs to sheet
 
@@ -64,13 +64,13 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       .setRequired(true)
       .setValidation(numericValidation)
 
+    // Replace tab characters, so later they don't interfere when downloading TSV
+    tweetsToAnnotate = tweetsToAnnotate.replace('\t', ' ')
+    knownRumours = knownRumours.replace('\t', ' ')
+
     // Parse JSON strings
     var tweets = JSON.parse(tweetsToAnnotate).tweetSample
-    knownRumours = knownRumours.replace('\t', ' ') // Replace tab characters, so later they don't interfere when downloading TSV
     var rumours = JSON.parse(knownRumours)
-
-    // Write Tweet IDs to destination spreadsheet
-    // writeResponseColumnHeaders(destination, tweets)
 
     // ~~~ NEW PAGE FOR EACH TWEET ~~~ //
 
@@ -80,7 +80,8 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
       // New page
       form.addPageBreakItem()
-        .setTitle("Tweet #" + tweet.numericID)
+        .setTitle("Tweet #" + (i+1))
+        .setGoToPage(FormApp.PageNavigationType.CONTINUE)
 
       // ~~~ Category annotation ~~~ //
 
@@ -88,7 +89,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       categoryHeader.setTitle(tweet.text)
 
       var categoryQuestion = form.addMultipleChoiceItem();
-      categoryQuestion.setTitle("Tweet #" + tweet.numericID + ": Category")
+      categoryQuestion.setTitle("Tweet #" + (i+1) + ": Category")
       categoryQuestion.setHelpText("Which category does this Tweet primarily belong to?")
 
       var categories = [
@@ -112,7 +113,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       rumourHeader.setTitle(tweet.text)
 
       var rumourQuestion = form.addMultipleChoiceItem();      
-      rumourQuestion.setTitle("Tweet #" + tweet.numericID + ": Claim Identification")
+      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Claim Identification")
       rumourQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
 
       // Get rumour shortlist
@@ -126,6 +127,23 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
       rumourQuestion.setChoiceValues(choices)
     }
+
+    // ~~~ SUBMIT PAGE ~~~ //
+    form.addPageBreakItem()
+      .setTitle("Submit")
+      .setGoToPage(FormApp.PageNavigationType.SUBMIT)
+
+    // ~~~ META-DATA PAGE ~~~ //
+
+    form.addPageBreakItem()
+      .setTitle("Invisible Page - Ignore!")
+    
+    form.addTextItem()
+      .setTitle(tweetsToAnnotate)
+
+    form.addTextItem()
+      .setTitle(knownRumours)
+    
   }
   catch (error) {
     Logger.log(error)
@@ -137,25 +155,6 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
   return 'Success! <a href=' + form.getPublishedUrl() + ' target="_blank">View Generated Form</a>'
 }
-
-/**
- * DOESN'T SEEM TO OVERWRITE HEADER CORRECTLY. JUST SOLVE IN PARSER?
- * Overwrite the question title with info more useful for parsing
- * @param {SpreadsheetApp.Spreadsheet} destination
- * @param {Object[]} tweets
- * 
-function writeResponseColumnHeaders(destination, tweets) {
-  var tweetIDs = tweets.map(tweet => { return tweet.tweetID })
-  var columnHeaders = []
-  for (let i = 0; i < tweetIDs.length; i++) {
-    columnHeaders.push("category " + tweetIDs[i])
-    columnHeaders.push("claim " + tweetIDs[i])
-  }
-
-  destination.getSheetByName("Form Responses 1").getRange(2, 4, 1, columnHeaders.length)
-    .setValues([columnHeaders])
-}
-*/
 
 /**
  * Returns true if parameters are invalid, else false
@@ -211,12 +210,12 @@ function parseShortlist(tweet, rumours) {
 /**
  * Move given id to the Forms folder in the shared drive
  */
-function moveFile(id) {
+function moveFile(id, subdirectory) {
   var file = DriveApp.getFileById(id)
   var annotationFolder = getAnnotationFolder()
-  var formFolder = annotationFolder.getFoldersByName("Forms").next()
+  var folder = annotationFolder.getFoldersByName(subdirectory).next()
 
-  file.moveTo(formFolder)
+  file.moveTo(folder)
 }
 
 /**
@@ -264,13 +263,11 @@ function testGenerateForm() {
       tweetSample: [
         { 
           tweetID: 'gioshwsejh32hg39',
-          numericID: 1,
           text: 'covid is not as bad as normal flu #plandemic',
           rumourShortlist: [ 1, 8, 16, 80 ]
         },
         {
-          tweetID: 'q1tusehjsehj9oi3g23', 
-          numericID: 2,
+          tweetID: 'q1tusehjsehj9oi3g23',
           text: '@user drinking bleach cures covid',
           rumourShortlist: [ 15, 8, 100, 211 ]
         }
@@ -282,7 +279,7 @@ function testGenerateForm() {
     { 
       '1': {rumourID: 1, category: 'VACCINE', veracity: "FALSE", description: 'Vaccines cause autism.'},
       '8': {rumourID: 8, category: 'MEDICAL', veracity: "FALSE", description: 'Drink  lots of water and you will be fine.'},
-      '15': {rumourID: 15, category: '5G', veracity: "FALSE", description: '5G towers\tcontribute to the spread of Coronavirus'}      
+      '15': {rumourID: 15, category: '5G', veracity: "FALSE", description: '5G towers contribute to the spread of Coronavirus'}      
     }
   )
 

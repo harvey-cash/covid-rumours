@@ -1,11 +1,14 @@
 from tkinter import filedialog
+import json
 
 """
 This script is responsible for the specifics of parsing the Google Forms response Sheets
 into JSONs that can be added to the datastore
 """
 
-NON_TWEET_QUESTIONS = 2  # Number of non-tweet questions (Timestamp, Email Address, Participant ID)
+NON_TWEET_QUESTIONS = 2  # Number of non-tweet questions (Timestamp, Participant ID)
+PARTICIPANT_ID_COLUMN = 1  # Second column
+META_DATA_COLUMNS = 2  # tweetsToAnnotate and knownRumours JSON
 DELIMITER = '\t'  # TSV
 
 
@@ -32,14 +35,15 @@ def load_annotation_file(file_path):
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
-    # Parse header for numeric tweet IDs
-    numeric_tweet_ids = parse_header_string(lines[0])
+    # Parse header for meta data
+    tweets_to_annotate, known_rumours = parse_meta_data(lines[0])
+    tweet_count = len(tweets_to_annotate["tweetSample"])
 
     annotations = []
 
     # Parse each line for participant IDs and question responses
     for line in lines[1:]:  # Omitting header
-        participant_id, responses = parse_line(line)
+        participant_id, responses = parse_line(line, tweet_count)
 
         annotation_dict = {"participantID": participant_id, "annotations": []}
 
@@ -49,11 +53,11 @@ def load_annotation_file(file_path):
             if category == "" and claim == "":
                 continue
 
-            numeric_tweet_id = numeric_tweet_ids[i]
+            tweet_id = tweets_to_annotate["tweetSample"][i]["tweetID"]  # Fetch from original JSON
 
             # ToDo: Replace "other" claim strings with -1 or -2 codes?
             annotation_dict["annotations"].append({
-                "numericTweetID": numeric_tweet_id,
+                "tweetID": tweet_id,
                 "category": category,
                 "rumourID": claim
             })
@@ -63,33 +67,23 @@ def load_annotation_file(file_path):
     return annotations
 
 
-def parse_header_string(header_string):
-    """ Returns list of numeric tweet IDs parsed from CSV header """
-    numeric_tweet_ids = []
-
-    column_names = header_string.split(DELIMITER)
-    tweet_questions = column_names[NON_TWEET_QUESTIONS:]  # Drop the non-tweet question titles
-    tweet_count = round(len(tweet_questions) / 2)  # Category and claim question for each tweet
-
-    for i in range(tweet_count):
-        # ~~~ "Tweet #12: Category" ~~~
-        question_string = tweet_questions[i*2]  # skip every other question
-        numeric_id = int((question_string.split('#')[1]).split(':')[0])  # Extract number
-        numeric_tweet_ids.append(numeric_id)
-
-    return numeric_tweet_ids
+def parse_meta_data(header_string):
+    """ Returns tweetsToAnnotate and knownRumours used in form generation as python dictionaries """
+    columns = header_string.split(DELIMITER)
+    tweets_to_annotate = json.loads(columns[-2])  # Second from last
+    known_rumours = json.loads(columns[-1])
+    return tweets_to_annotate, known_rumours
 
 
-def parse_line(line_string):
+def parse_line(line_string, tweet_count):
     """ Returns participant ID and list of ("CATEGORY", rumourID) tuples for each tweet
      - includes empty string values for those not answered """
     fields = line_string.split(DELIMITER)
 
-    participant_id = int(fields[2])  # Third column
+    participant_id = int(fields[PARTICIPANT_ID_COLUMN])  # Second column
     responses = []
 
     tweet_answers = fields[NON_TWEET_QUESTIONS:]  # Drop the non-tweet question answers
-    tweet_count = round(len(tweet_answers) / 2)  # Category and claim answers for each tweet
 
     for i in range(tweet_count):
         category = tweet_answers[i*2]  # Simply a string e.g. "Virus Transmission" or "" if not answered
