@@ -23,7 +23,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
   var description = "This form contains a set of social media posts, ready for annotation. " +
                     "You will be asked to determine which category a tweet belongs to, " +
-                    "and which COVID-19 rumour it discusses."
+                    "and which COVID-19 claim it discusses."
 
   try {
 
@@ -31,7 +31,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
     var form = FormApp.create(formName)
       .setTitle(formName)
       .setDescription(description)
-      .setCollectEmail(true)
+      .setCollectEmail(false)
       .setProgressBar(true)
       .setLimitOneResponsePerUser(true)
       .setAllowResponseEdits(true)
@@ -39,11 +39,13 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       .setPublishingSummary(true)
 
     // Create spreadsheet destination
-    var destination = SpreadsheetApp.create(formName + "_responses")
-    moveFile(destination.getId())
+    var destination = SpreadsheetApp.create(formName + "_" + form.getId() + "_responses")
     form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
 
-    moveFile(form.getId()) // move to shared drive folder
+    // move to shared drive folder
+    moveFile(form.getId(), 'Forms')    
+    moveFile(destination.getId(), 'Responses')
+
     writeFormLog(form, formName, metaData) // write ID and URLs to sheet
 
 
@@ -62,6 +64,10 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       .setRequired(true)
       .setValidation(numericValidation)
 
+    // Replace tab characters, so later they don't interfere when downloading TSV
+    tweetsToAnnotate = tweetsToAnnotate.replace('\t', ' ')
+    knownRumours = knownRumours.replace('\t', ' ')
+
     // Parse JSON strings
     var tweets = JSON.parse(tweetsToAnnotate).tweetSample
     var rumours = JSON.parse(knownRumours)
@@ -70,11 +76,12 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
     // For each tweet, create a new annotation question
     for (let i = 0; i < tweets.length; i++) {
+      var tweet = tweets[i]
+
       // New page
       form.addPageBreakItem()
         .setTitle("Tweet #" + (i+1))
-
-      var tweet = tweets[i]
+        .setGoToPage(FormApp.PageNavigationType.CONTINUE)
 
       // ~~~ Category annotation ~~~ //
 
@@ -106,20 +113,37 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       rumourHeader.setTitle(tweet.text)
 
       var rumourQuestion = form.addMultipleChoiceItem();      
-      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Rumour Identification")
-      rumourQuestion.setHelpText("Which rumour does this Tweet primarily discuss?")
+      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Claim Identification")
+      rumourQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
 
       // Get rumour shortlist
       // ToDo: Filter rumour shortlist based on annotated category?
       var shortlistedRumours = parseShortlist(tweet, rumours)
 
       // Add rumour descriptions as response choices
-      var choices = shortlistedRumours.map(r => { return r.description })
-      choices.push('Other: rumour not listed')
-      choices.push('Other: does not discuss a rumour')
+      var choices = shortlistedRumours.map(r => { return "Claim #" + r.rumourID + ": " + r.description })
+      choices.push('Other: Claim not listed')
+      choices.push('Other: Does not discuss a claim')
 
       rumourQuestion.setChoiceValues(choices)
     }
+
+    // ~~~ SUBMIT PAGE ~~~ //
+    form.addPageBreakItem()
+      .setTitle("Submit")
+      .setGoToPage(FormApp.PageNavigationType.SUBMIT)
+
+    // ~~~ META-DATA PAGE ~~~ //
+
+    form.addPageBreakItem()
+      .setTitle("Invisible Page - Ignore!")
+    
+    form.addTextItem()
+      .setTitle(tweetsToAnnotate)
+
+    form.addTextItem()
+      .setTitle(knownRumours)
+    
   }
   catch (error) {
     Logger.log(error)
@@ -172,8 +196,9 @@ function parseShortlist(tweet, rumours) {
 
   // For each rumour in the shortlist...
   var shortlistedIDs = tweet.rumourShortlist
-  for (let i = 0; i < shortlistedIDs.length; i++) {      
-    var rumour = rumours[shortlistedIDs[i]]; // Find the entry of the rumour
+  for (let i = 0; i < shortlistedIDs.length; i++) {    
+    var rumourIDString = shortlistedIDs[i].toString()  
+    var rumour = rumours[rumourIDString]; // Find the entry of the rumour
 
     // If a rumour in the set is present in the shortlist, add it to the question
     if (rumour != null) { shortlist.push(rumour) }
@@ -185,12 +210,12 @@ function parseShortlist(tweet, rumours) {
 /**
  * Move given id to the Forms folder in the shared drive
  */
-function moveFile(id) {
+function moveFile(id, subdirectory) {
   var file = DriveApp.getFileById(id)
   var annotationFolder = getAnnotationFolder()
-  var formFolder = annotationFolder.getFoldersByName("Forms").next()
+  var folder = annotationFolder.getFoldersByName(subdirectory).next()
 
-  file.moveTo(formFolder)
+  file.moveTo(folder)
 }
 
 /**
@@ -237,14 +262,14 @@ function testGenerateForm() {
     { 
       tweetSample: [
         { 
-          tweetID: 'gioshwsejh32hg39', 
+          tweetID: 'gioshwsejh32hg39',
           text: 'covid is not as bad as normal flu #plandemic',
-          rumourShortlist: [ '001', '008', '016', '080' ]
+          rumourShortlist: [ 1, 8, 16, 80 ]
         },
         {
-          tweetID: 'q1tusehjsehj9oi3g23', 
+          tweetID: 'q1tusehjsehj9oi3g23',
           text: '@user drinking bleach cures covid',
-          rumourShortlist: [ '015', '008', '100', '211' ]
+          rumourShortlist: [ 15, 8, 100, 211 ]
         }
       ]
     }
@@ -252,9 +277,9 @@ function testGenerateForm() {
 
   var rumourJSON = JSON.stringify(
     { 
-      '001': {category: 'VACCINE', veracity: true, description: 'Vaccines cause autism.'},
-      '008': {category: 'MEDICAL', veracity: false, description: 'Drink lots of water and you will be fine.'},
-      '015': {category: '5G', veracity: false, description: '5G towers contribute to the spread of Coronavirus'}      
+      '1': {rumourID: 1, category: 'VACCINE', veracity: "FALSE", description: 'Vaccines cause autism.'},
+      '8': {rumourID: 8, category: 'MEDICAL', veracity: "FALSE", description: 'Drink  lots of water and you will be fine.'},
+      '15': {rumourID: 15, category: '5G', veracity: "FALSE", description: '5G towers contribute to the spread of Coronavirus'}      
     }
   )
 
