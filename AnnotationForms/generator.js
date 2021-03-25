@@ -55,7 +55,7 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
 
         // Create claim shortlists
         // ToDo: Filter by category
-        var shortlist = parseShortlist(pages[i].tweet, rumours)
+        var shortlist = parseShortlist(pages[i].tweet, rumours, claimPage.category)
         var choices = shortlist.map(r => { return "Claim #" + r.rumourID + ": " + r.description })
         choices.push('Other: Claim not listed')
         choices.push('Other: Does not discuss a claim')
@@ -147,7 +147,7 @@ function createFormPages(form, tweets) {
     // For each category, present claim shortlist
     var claimPages = categories.map(category => {
       var claimPage = form.addPageBreakItem()
-      claimPage.setTitle(category)
+      claimPage.setTitle("Claim Identification")
       
       // Tweet text
       form.addSectionHeaderItem()
@@ -155,7 +155,7 @@ function createFormPages(form, tweets) {
 
       // Annotate claim
       var claimQuestion = form.addMultipleChoiceItem()
-      claimQuestion.setTitle("Tweet #" + (i+1) + ": " + category +" Claim Identification")
+      claimQuestion.setTitle("Claims: " + category)
       claimQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
 
       return {"category": category, "page": claimPage, "question": claimQuestion} 
@@ -229,9 +229,9 @@ function badlyFormattedParameters(formName, tweetsToAnnotate, knownRumours) {
 }
 
 /**
- * Return a list of rumours for the given tweet
+ * Return a list of rumours for the given tweet, filtered by category
  */
-function parseShortlist(tweet, rumours) {
+function parseShortlist(tweet, rumours, category) {
   var shortlist = []
 
   // For each rumour in the shortlist...
@@ -240,8 +240,8 @@ function parseShortlist(tweet, rumours) {
     var rumourIDString = shortlistedIDs[i].toString()  
     var rumour = rumours[rumourIDString]; // Find the entry of the rumour
 
-    // If a rumour in the set is present in the shortlist, add it to the question
-    if (rumour != null) { shortlist.push(rumour) }
+    // Add if rumour exists and matches the category
+    if (rumour != null && rumour.category == category) { shortlist.push(rumour) }
   }
 
   return shortlist
@@ -317,9 +317,9 @@ function testGenerateForm() {
 
   var rumourJSON = JSON.stringify(
     { 
-      '1': {rumourID: 1, category: 'VACCINE', veracity: "FALSE", description: 'Vaccines cause autism.'},
-      '8': {rumourID: 8, category: 'MEDICAL', veracity: "FALSE", description: 'Drink  lots of water and you will be fine.'},
-      '15': {rumourID: 15, category: '5G', veracity: "FALSE", description: '5G towers contribute to the spread of Coronavirus'}      
+      '1': {rumourID: 1, category: 'Virus origin and properties', veracity: "FALSE", description: 'Vaccines cause autism.'},
+      '8': {rumourID: 8, category: 'Medical advice and self-treatments', veracity: "FALSE", description: 'Drink  lots of water and you will be fine.'},
+      '15': {rumourID: 15, category: 'Conspiracy theories', veracity: "FALSE", description: '5G towers contribute to the spread of Coronavirus'}      
     }
   )
 

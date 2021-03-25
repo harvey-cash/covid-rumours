@@ -3,17 +3,17 @@ var description = "This form contains a set of social media posts, ready for ann
                     "and which COVID-19 claim it discusses."
 
 var categories = [
-        "Public Authority",
-        "Community",
-        "Medical Advice",
-        "Prominent Actors",
-        "Conspiracy",
-        "Virus Transmission",
-        "Virus Origin",
-        "Civil Unrest",
-        "Vaccine",
-        "Other"
-      ]
+  "Public authority actions, policy, and communications",
+  "Community spread and impact",
+  "Medical advice and self-treatments",
+  "Claims about prominent actors",
+  "Conspiracy theories",
+  "Virus transmission",
+  "Virus origin and properties",
+  "Public preparedness, protests, and civil disobedience",
+  "Vaccines, medical treatments, and tests",
+  "Other"
+]
 
 /**
  * Clean out bad characters and return JSON Object
