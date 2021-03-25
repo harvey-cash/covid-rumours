@@ -21,128 +21,48 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
     return "Check that the fields are filled out and the JSON strings are structured correctly!"
   }
 
-  var description = "This form contains a set of social media posts, ready for annotation. " +
-                    "You will be asked to determine which category a tweet belongs to, " +
-                    "and which COVID-19 claim it discusses."
-
   try {
+    // Create form, response sheet, move to Shared Drive folder, and write record log
+    var form = createFormAndResponses(formName, metaData)
 
-    // Create form with title
-    var form = FormApp.create(formName)
-      .setTitle(formName)
-      .setDescription(description)
-      .setCollectEmail(false)
-      .setProgressBar(true)
-      .setLimitOneResponsePerUser(true)
-      .setAllowResponseEdits(true)
-      .setRequireLogin(false)
-      .setPublishingSummary(true)
+    createParticipantNumQuestion(form)
 
-    // Create spreadsheet destination
-    var destination = SpreadsheetApp.create(formName + "_" + form.getId() + "_responses")
-    form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
+    var tweets = parseJSON(tweetsToAnnotate).tweetSample
+    var rumours = parseJSON(knownRumours)
 
-    // move to shared drive folder
-    moveFile(form.getId(), 'Forms')    
-    moveFile(destination.getId(), 'Responses')
+    // Create all pages and questions first
+    var pages = createFormPages(form, tweets)
 
-    writeFormLog(form, formName, metaData) // write ID and URLs to sheet
+    // Create hidden metadata page
+    var submitPage = createMetaDataPage(form, tweets, rumours)
 
+    for (let i = 0; i < pages.length; i++) {
+      // Now set the choices for each question to navigate to the correct page
+      var categoryQuestion = pages[i].question
 
-    // ~~~ CONSTRUCT QUESTIONS ~~~ //
+      // Create a choice for each category, which navigates to the claim page for that category
+      categoryQuestion.setChoices(pages[i].claimPages.map(claimPage => {
+        return categoryQuestion.createChoice(claimPage.category, claimPage.page)
+      }))
 
-    // For numeric answer questions
-    var numericValidation = FormApp.createTextValidation()
-      .setHelpText('Input must be a number between 0 and 100.')
-      .requireNumberBetween(0, 100)
-      .build()
-    
-    // Participant ID number
-    var participantNumberQ = form.addTextItem()
-      .setTitle('Participant ID')
-      .setHelpText('Your unique participant number, provided when you signed up for the study.')
-      .setRequired(true)
-      .setValidation(numericValidation)
+      // For each claim page
+      for (let j = 0; j < pages[i].claimPages.length; j++) {
+        var claimPage = pages[i].claimPages[j]
 
-    // Replace tab characters, so later they don't interfere when downloading TSV
-    tweetsToAnnotate = tweetsToAnnotate.replace('\t', ' ')
-    knownRumours = knownRumours.replace('\t', ' ')
+        // Skip to next tweet page or end of form if no more tweets!
+        var navigatePage = (i < pages.length - 1) ? pages[i+1].page : submitPage
+        claimPage.page.setGoToPage(navigatePage)
 
-    // Parse JSON strings
-    var tweets = JSON.parse(tweetsToAnnotate).tweetSample
-    var rumours = JSON.parse(knownRumours)
+        // Create claim shortlists
+        // ToDo: Filter by category
+        var shortlist = parseShortlist(pages[i].tweet, rumours)
+        var choices = shortlist.map(r => { return "Claim #" + r.rumourID + ": " + r.description })
+        choices.push('Other: Claim not listed')
+        choices.push('Other: Does not discuss a claim')
 
-    // ~~~ NEW PAGE FOR EACH TWEET ~~~ //
-
-    // For each tweet, create a new annotation question
-    for (let i = 0; i < tweets.length; i++) {
-      var tweet = tweets[i]
-
-      // New page
-      form.addPageBreakItem()
-        .setTitle("Tweet #" + (i+1))
-        .setGoToPage(FormApp.PageNavigationType.CONTINUE)
-
-      // ~~~ Category annotation ~~~ //
-
-      var categoryHeader = form.addSectionHeaderItem()
-      categoryHeader.setTitle(tweet.text)
-
-      var categoryQuestion = form.addMultipleChoiceItem();
-      categoryQuestion.setTitle("Tweet #" + (i+1) + ": Category")
-      categoryQuestion.setHelpText("Which category does this Tweet primarily belong to?")
-
-      var categories = [
-        "Public Authority",
-        "Community",
-        "Medical Advice",
-        "Prominent Actors",
-        "Conspiracy",
-        "Virus Transmission",
-        "Virus Origin",
-        "Civil Unrest",
-        "Vaccine",
-        "Other"
-      ]
-
-      categoryQuestion.setChoiceValues(categories);
-
-      // ~~~ Rumour identification ~~~ //      
-
-      var rumourHeader = form.addSectionHeaderItem()
-      rumourHeader.setTitle(tweet.text)
-
-      var rumourQuestion = form.addMultipleChoiceItem();      
-      rumourQuestion.setTitle("Tweet #" + (i+1) + ": Claim Identification")
-      rumourQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
-
-      // Get rumour shortlist
-      // ToDo: Filter rumour shortlist based on annotated category?
-      var shortlistedRumours = parseShortlist(tweet, rumours)
-
-      // Add rumour descriptions as response choices
-      var choices = shortlistedRumours.map(r => { return "Claim #" + r.rumourID + ": " + r.description })
-      choices.push('Other: Claim not listed')
-      choices.push('Other: Does not discuss a claim')
-
-      rumourQuestion.setChoiceValues(choices)
+        claimPage.question.setChoiceValues(choices)
+      }
     }
-
-    // ~~~ SUBMIT PAGE ~~~ //
-    form.addPageBreakItem()
-      .setTitle("Submit")
-      .setGoToPage(FormApp.PageNavigationType.SUBMIT)
-
-    // ~~~ META-DATA PAGE ~~~ //
-
-    form.addPageBreakItem()
-      .setTitle("Invisible Page - Ignore!")
-    
-    form.addTextItem()
-      .setTitle(tweetsToAnnotate)
-
-    form.addTextItem()
-      .setTitle(knownRumours)
     
   }
   catch (error) {
@@ -154,6 +74,126 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
   Logger.log('Editor URL: ' + form.getEditUrl())
 
   return 'Success! <a href=' + form.getPublishedUrl() + ' target="_blank">View Generated Form</a>'
+}
+
+/**
+ * 
+ */
+function createFormAndResponses(formName, metaData) {
+  var form = FormApp.create(formName)
+    .setTitle(formName)
+    .setDescription(description)
+    .setCollectEmail(false)
+    .setProgressBar(true)
+    .setLimitOneResponsePerUser(true)
+    .setAllowResponseEdits(true)
+    .setRequireLogin(false)
+    .setPublishingSummary(true)
+
+  // Create spreadsheet destination
+  var destination = SpreadsheetApp.create(formName + "_" + form.getId() + "_responses")
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, destination.getId())
+
+  // move to shared drive folder
+  moveFile(form.getId(), 'Forms')    
+  moveFile(destination.getId(), 'Responses')
+
+  writeFormLog(form, formName, metaData) // write ID and URLs to sheet
+
+  return form
+}
+
+/**
+ * Creates participant number question with numeric validation and adds to form
+ */
+function createParticipantNumQuestion(form) {
+  // For numeric answer questions
+    var numericValidation = FormApp.createTextValidation()
+      .setHelpText('Input must be a number between 0 and 100.')
+      .requireNumberBetween(0, 100)
+      .build()
+    
+    // Participant ID number
+    return form.addTextItem()
+      .setTitle('Participant ID')
+      .setHelpText('Your unique participant number, provided when you signed up for the study.')
+      .setRequired(true)
+      .setValidation(numericValidation)
+}
+
+/** Data structure containing all the pages of the form
+ * @return {array}
+ * [ // for each tweet
+ *  { tweet: tweet, page: annotateCategoryPage, claimPages: [ {category: string, page: page } ] }
+ * ]
+ */
+function createFormPages(form, tweets) {
+  var pages = []
+
+  // For each tweet, create a new annotation question
+  for (let i = 0; i < tweets.length; i++) {
+    var categoryPage = form.addPageBreakItem()
+      .setTitle("Tweet #" + (i+1))
+
+    // Tweet text
+    form.addSectionHeaderItem()
+      .setTitle(tweets[i].text)
+    
+    // Annotate category
+    var categoryQuestion = form.addMultipleChoiceItem();
+    categoryQuestion.setTitle("Tweet #" + (i+1) + ": Category")
+    categoryQuestion.setHelpText("Which category does this Tweet primarily belong to?")
+
+    // For each category, present claim shortlist
+    var claimPages = categories.map(category => {
+      var claimPage = form.addPageBreakItem()
+      claimPage.setTitle(category)
+      
+      // Tweet text
+      form.addSectionHeaderItem()
+        .setTitle(tweets[i].text)
+
+      // Annotate claim
+      var claimQuestion = form.addMultipleChoiceItem()
+      claimQuestion.setTitle("Tweet #" + (i+1) + ": " + category +" Claim Identification")
+      claimQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
+
+      return {"category": category, "page": claimPage, "question": claimQuestion} 
+    })
+    
+    // Populate data structure
+    pages.push({
+      "tweet": tweets[i], 
+      "page": categoryPage, 
+      "question": categoryQuestion, 
+      "claimPages": claimPages
+    })
+  }
+
+  return pages
+}
+
+/**
+ * 
+ */
+function createMetaDataPage(form, tweets, rumours) {
+  // Submit page
+  var submitPage = form.addPageBreakItem()
+  submitPage.setTitle("Submit")
+  submitPage.setHelpText("Thank you for your time! We are always in need of more data to improve the quality of our research, so please contact the research team if you would like to annotate more tweets.")
+  submitPage.setGoToPage(FormApp.PageNavigationType.SUBMIT) // Skip the metadata page
+
+  form.addPageBreakItem()
+    .setTitle("Invisible Page - Ignore!")
+    .setGoToPage(FormApp.PageNavigationType.SUBMIT)
+  
+  form.addTextItem()
+    .setTitle(JSON.stringify(tweets))
+
+  form.addTextItem()
+    .setTitle(JSON.stringify(rumours))
+  
+  return submitPage
 }
 
 /**
