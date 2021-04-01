@@ -1,6 +1,7 @@
 """
 Methods for constructing an index of word: {doc_id: frequency} structure
 """
+import pandas as pd
 
 
 def category_index(category, file_path="../RumourDatabase.csv"):
@@ -13,7 +14,10 @@ def category_index(category, file_path="../RumourDatabase.csv"):
     claims = parse_claims(file_path)  # List of {doc_id, content, category}
 
     # Filter for category
-    claims = [claim for claim in claims if claim.category == category]
+    claims = [claim for claim in claims if claim['category'] == category]
+
+    # Remove stop-words, punctuation, etc.
+    claims = [clean_preprocess(claim) for claim in claims]
 
     # For each claim, count word frequencies
     claim_words = [count_words(claim) for claim in claims]  # List of {doc_id: {word: frequency}}
@@ -31,7 +35,16 @@ def category_index(category, file_path="../RumourDatabase.csv"):
 
 def parse_claims(file_path):
     """ Return list of {doc_id, content, category} dictionaries """
-    return []
+    df = pd.read_csv(file_path)
+    df.dropna(axis='columns', how='all', inplace=True)  # Drop any columns that are all N/A
+    df.dropna(axis='index', how='any', inplace=True)  # Drop any rows that have at least one N/A
+    return [{"doc_id": int(row['Index']), "content": row['Claim'], "category": row['Category']} for i, row in df.iterrows()]
+
+
+def clean_preprocess(claim):
+    """ Clean string of punctuation, stop words, etc. """
+    # ToDo: Call from utils library..?
+    return claim
 
 
 def count_words(claim):
@@ -39,7 +52,9 @@ def count_words(claim):
     :param claim: dictionary of {doc_id, content, category}
     :return: dictionary of {doc_id: {word: frequency}}
     """
-    return {}
+    words = claim['content'].split(' ')  # Split words
+    frequencies = {word: len([w for w in words if w == word]) for word in words}
+    return {claim['doc_id']: frequencies}
 
 
 def unique_words(claim_words):
@@ -47,7 +62,11 @@ def unique_words(claim_words):
     :param claim_words: list of {doc_id: {word: frequency}}
     :return: set of unique words
     """
-    return set()
+    words = set()
+    for claim_dict in claim_words:
+        words_dict = list(claim_dict.values())[0]
+        words = words.union(words_dict.keys())
+    return words
 
 
 def claim_word_frequencies(claim_words, word):
@@ -56,4 +75,12 @@ def claim_word_frequencies(claim_words, word):
     :param word: string
     :return: Dictionary of {doc_id: frequency} for given word
     """
-    return {}
+    word_freqs = {}
+    for claim in claim_words:
+        doc_id = list(claim.keys())[0]
+        frequency = list(claim.values())[0].get(word, 0)
+
+        if frequency > 0:
+            word_freqs[doc_id] = frequency
+
+    return word_freqs
