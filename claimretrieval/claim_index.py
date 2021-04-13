@@ -2,6 +2,7 @@
 Methods for constructing an index of word: {doc_id: frequency} structure
 """
 import pandas as pd
+from utils import preprocess_text
 
 
 def category_index(category, file_path="../RumourDatabase.csv"):
@@ -42,8 +43,10 @@ def parse_claims(file_path):
 
 
 def clean_preprocess(claim):
-    """ Clean string of punctuation, stop words, etc. """
-    # ToDo: Call from utils library..?
+    """ Clean string of punctuation, stop words, etc.
+    :param claim: dictionary of {doc_id, content, category}
+    """
+    claim['content'] = preprocess_text.clean_all(claim['content'])
     return claim
 
 

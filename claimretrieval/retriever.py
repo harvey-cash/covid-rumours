@@ -34,6 +34,8 @@ class Retriever:
         # Calculate cosine document-query similarity for all documents
         doc_similarities = cosine_similarity(weighted_query, self.weighted_index)
 
+        # ToDo: Threshold similarity
+
         descending_similarities = sort_dict(doc_similarities, descending=True)
         descending_docs = [doc for (doc, sim) in descending_similarities]
 

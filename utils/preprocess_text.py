@@ -49,7 +49,7 @@ def remove_small_terms(content):
 
 def clean_all(content):
     nostop_content = remove_stopwords(content)
-    lemmatized_content = lemmatize_words(nostop_content)
-    stemmed_content = stem_words(lemmatized_content)
-    clean_content = remove_small_terms(stemmed_content)
-    return clean_content
+    lemmatized_content = lemmatize_words(" ".join(nostop_content))
+    stemmed_content = stem_words(" ".join(lemmatized_content))
+    clean_content = remove_small_terms(" ".join(stemmed_content))
+    return " ".join(clean_content)
