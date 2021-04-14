@@ -36,11 +36,11 @@ def remove_non_alpha_chars_from_str(claim):
     only_alpha = claim.replace(r'[_\W\d]',' ')
     return only_alpha.strip()
 
-def clean_df(content_collection, stop_words=[], filter_short=3, lemmatize=True, porter_stem=False, lan_stem=False):
-    stop_words = stop_words if stop_words else set(stopwords.words('english'))
+def clean_df(content_collection, stop_words=[], filter_short=3, lemmatize=True, porter_stem=False, lan_stem=False, clean_non_alpha=True):
     word_tok = ToktokTokenizer()
     clean_content = []
-    content_collection = remove_non_alpha_chars(content_collection)
+    if clean_non_alpha:
+        content_collection = remove_non_alpha_chars(content_collection)
     for content in content_collection:
         word_tokens = word_tok.tokenize(content)
         words = lowercase(word_tokens)
@@ -50,17 +50,18 @@ def clean_df(content_collection, stop_words=[], filter_short=3, lemmatize=True, 
         clean_content.append(remove_small_terms(words, filter_short))
     return clean_content
 
-def clean_str(claim, stop_words=[], filter_short=3, lemmatize=True, porter_stem=False, lan_stem=False):
-    stop_words = stop_words if stop_words else set(stopwords.words('english'))
+def clean_str(claim, stop_words=[], filter_short=3, lemmatize=True, porter_stem=False, lan_stem=False, clean_non_alpha=True):
     word_tok = ToktokTokenizer()
-    claim = remove_non_alpha_chars_from_str(claim)
+    if clean_non_alpha:
+        claim = remove_non_alpha_chars_from_str(claim)
     word_tokens = word_tok.tokenize(claim)
     words = lowercase(word_tokens)
     words = remove_stopwords(words, stop_words)
     words = lemmatize_words(words)
     words = stem_words(words, porter_stem, lan_stem)
     return " ".join(remove_small_terms(words, filter_short))
-    
+
+stop_words = set(stopwords.words('english'))
 df = pd.read_csv('../RumourDatabase.csv',encoding='utf8')
-clean_content = clean_str(df['Claim'][0], lemmatize=False, porter_stem=True)
+clean_content = clean_str(df['Claim'][0], stop_words = stop_words, lemmatize=False, porter_stem=True)
 print(clean_content)
