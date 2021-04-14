@@ -5,6 +5,15 @@ import pandas as pd
 from utils import preprocess_text
 
 
+def construct_indices(categories, file_path="../RumourDatabase.csv"):
+    """
+    :param categories: list of all category strings
+    :param file_path: path to CSV file of claims
+    :return: a dictionary of category indices and dictionary of word: {doc_id: frequency} values
+    """
+    return {category: category_index(category, file_path) for category in categories}
+
+
 def category_index(category, file_path="../RumourDatabase.csv"):
     """
     :param file_path: path to CSV file of claims
