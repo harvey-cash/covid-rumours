@@ -61,7 +61,12 @@ def clean_str(claim, stop_words=[], filter_short=3, lemmatize=True, porter_stem=
     words = stem_words(words, porter_stem, lan_stem)
     return " ".join(remove_small_terms(words, filter_short))
 
+
+# Shouldn't have arbitrary code executing at the bottom of a library file. Put it in a method and call it, if you need
+# it to be in this script?
+"""
 stop_words = set(stopwords.words('english'))
 df = pd.read_csv('../RumourDatabase.csv',encoding='utf8')
 clean_content = clean_str(df['Claim'][0], stop_words = stop_words, lemmatize=False, porter_stem=True)
 print(clean_content)
+"""
