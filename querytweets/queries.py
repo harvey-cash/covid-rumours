@@ -37,7 +37,7 @@ def random_rumours(amount, categories):
     #   query = f(x)
     #  should_array.append({"terms": {"hashtags": query[0], "boost": query[1]}})
 
-    input_file = open("bowPerCategory.json", "r")
+    input_file = open("bowPerCategoryNew.json", "r")
     input_data = input_file.read()
     # using BOW
     category_BOW = json.loads(
