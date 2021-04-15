@@ -1,0 +1,39 @@
+﻿,misconception_id,misconception,tweet_id,label,category
+10,3,Coronavirus is genetically engineered.,1.23393E+18,pos,Conspiracy theories
+24,11,Viruses are wastes from cells that are poisoned by electromagnetic fields.,1.23393E+18,neg,Virus origin and properties
+32,1,A person can tell if they have coronavirus or not simply by holding their breath.,1.23395E+18,pos,Medical advice and self-treatments
+41,50,It is safe for individuals infected with COVID-19 to go to work.,1.23393E+18,neg,Virus transmission
+75,15,Coronavirus can only survive in cold temperatures.,1.23398E+18,pos,Virus origin and properties
+109,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23398E+18,pos,Virus origin and properties
+110,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23397E+18,pos,Conspiracy theories
+121,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23393E+18,neg,Medical advice and self-treatments
+166,10,Coronavirus is caused by 5G.,1.23399E+18,pos,Conspiracy theories
+169,51,COVID-19 is only as deadly as the seasonal flu.,1.23395E+18,pos,Virus origin and properties
+192,49,We're very close to a vaccine.,1.23392E+18,pos,"Vaccines, medical treatments, and tests"
+219,19,Vitamin C cures coronavirus.,1.23397E+18,pos,Medical advice and self-treatments
+351,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23398E+18,pos,Medical advice and self-treatments
+356,5,The first person infected is a researcher named Huang Yanling.,1.23399E+18,neg,Community spread and impact
+455,8,Vitamin C can prevent coronavirus circulation.,1.23391E+18,pos,Medical advice and self-treatments
+469,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23394E+18,pos,Community spread and impact
+504,48,There will be 500 deaths at the end of the pandemic.,1.23398E+18,neg,Community spread and impact
+598,36,Chloroquine can cure coronavirus,1.23392E+18,pos,Medical advice and self-treatments
+624,44,Jim Bakker's colloidal silver solution is a remedy for COVID-19.,1.23394E+18,pos,Medical advice and self-treatments
+718,25,Holy communion cannot be the cause of the spread of coronavirus,1.23397E+18,neg,Virus transmission
+877,54,The Simpsons predicted COVID-19 pandemic.,1.23392E+18,pos,Conspiracy theories
+1188,18,Essential oils cure coronavirus.,1.23394E+18,pos,Medical advice and self-treatments
+1198,17,Avocado and mint tea cures coronavirus.,1.23394E+18,neg,Medical advice and self-treatments
+1321,2,Drinking large amounts of water will protect against coronavirus.,1.23399E+18,pos,Medical advice and self-treatments
+1614,35,Wearing shoes at one's home is the reason behind the spread of the coronavirus in italy.,1.23393E+18,pos,Virus transmission
+1857,7,Boiled ginger can cure coronavirus.,1.23393E+18,pos,Medical advice and self-treatments
+2191,28,Using namaste as a greeting prevents transmission of covid-19.,1.23399E+18,pos,Virus transmission
+2289,31,The lifetime of SARS-CoV-2 is only 12 hours.,1.23396E+18,neg,Virus origin and properties
+2304,9,Africans are more resistant to coronavirus.,1.23391E+18,pos,Community spread and impact
+2310,38,Shaking hands cannot spread coronavirus.,1.23399E+18,neg,Virus transmission
+2691,21,Fennel tea cures coronavirus.,1.23394E+18,neg,Medical advice and self-treatments
+4537,55,Drinking Corona-brand beer causes COVID-19.,1.23393E+18,neg,Virus transmission
+4593,13,Whiskey and honey cure coronavirus.,1.23392E+18,pos,Medical advice and self-treatments
+4637,43,Miracle Mineral Suppliment (MMS) will prevent and cure COVID-19.,1.23399E+18,neg,Medical advice and self-treatments
+5759,37,Jamaat cannot become a source of infection.,1.23395E+18,pos,Virus transmission
+6013,30,Blowing conch shells destroys coronavirus potency.,1.23395E+18,neg,Medical advice and self-treatments
+6065,12,Methanol consumption cures or protects against coronavirus.,1.23395E+18,neg,Medical advice and self-treatments
+6070,52,Chloroquine is a Food and Drug Administration (FDA) approved treatment for COVID-19.,1.23397E+18,pos,"Vaccines, medical treatments, and tests"

@@ -1,0 +1,64 @@
+,misconception_id,category,misconception,tweet_id,label
+0,3,Conspiracy theories,Coronavirus is genetically engineered.,1.23E+18,na
+1,11,Virus origin and properties,Viruses are wastes from cells that are poisoned by electromagnetic fields.,1.23E+18,neg
+2,1,Medical advice and self-treatments,A person can tell if they have coronavirus or not simply by holding their breath.,1.23E+18,pos
+3,50,Virus transmission,It is safe for individuals infected with COVID-19 to go to work.,1.23E+18,na
+4,15,Virus origin and properties,Coronavirus can only survive in cold temperatures.,1.23E+18,na
+5,23,Virus origin and properties,SARS-CoV-2 can survive for weeks on surfaces.,1.23E+18,na
+6,4,Conspiracy theories,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23E+18,na
+7,14,Medical advice and self-treatments,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23E+18,na
+8,10,Conspiracy theories,Coronavirus is caused by 5G.,1.23E+18,na
+9,51,Virus origin and properties,COVID-19 is only as deadly as the seasonal flu.,1.23E+18,na
+10,49,"Vaccines, medical treatments, and tests",We're very close to a vaccine.,1.23E+18,na
+11,19,Medical advice and self-treatments,Vitamin C cures coronavirus.,1.23E+18,pos
+12,27,Medical advice and self-treatments,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23E+18,na
+13,5,Community spread and impact,The first person infected is a researcher named Huang Yanling.,1.23E+18,na
+14,8,Medical advice and self-treatments,Vitamin C can prevent coronavirus circulation.,1.23E+18,na
+15,53,Community spread and impact,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23E+18,na
+16,48,Community spread and impact,There will be 500 deaths at the end of the pandemic.,1.23E+18,na
+17,36,Medical advice and self-treatments,Chloroquine can cure coronavirus,1.23E+18,na
+18,44,Medical advice and self-treatments,Jim Bakker's colloidal silver solution is a remedy for COVID-19.,1.23E+18,na
+19,25,Virus transmission,Holy communion cannot be the cause of the spread of coronavirus,1.23E+18,na
+20,54,Conspiracy theories,The Simpsons predicted COVID-19 pandemic.,1.23E+18,na
+21,18,Medical advice and self-treatments,Essential oils cure coronavirus.,1.23E+18,na
+22,17,Medical advice and self-treatments,Avocado and mint tea cures coronavirus.,1.23E+18,na
+23,2,Medical advice and self-treatments,Drinking large amounts of water will protect against coronavirus.,1.23E+18,na
+24,35,Virus transmission,Wearing shoes at one's home is the reason behind the spread of the coronavirus in italy.,1.23E+18,na
+25,7,Medical advice and self-treatments,Boiled ginger can cure coronavirus.,1.23E+18,na
+26,28,Virus transmission,Using namaste as a greeting prevents transmission of covid-19.,1.23E+18,na
+27,31,Virus origin and properties,The lifetime of SARS-CoV-2 is only 12 hours.,1.23E+18,na
+28,9,Community spread and impact,Africans are more resistant to coronavirus.,1.23E+18,na
+29,38,Virus transmission,Shaking hands cannot spread coronavirus.,1.23E+18,na
+30,21,Medical advice and self-treatments,Fennel tea cures coronavirus.,1.23E+18,na
+31,55,Virus transmission,Drinking Corona-brand beer causes COVID-19.,1.23E+18,na
+32,13,Medical advice and self-treatments,Whiskey and honey cure coronavirus.,1.23E+18,na
+33,43,Medical advice and self-treatments,Miracle Mineral Suppliment (MMS) will prevent and cure COVID-19.,1.23E+18,na
+34,37,Virus transmission,Jamaat cannot become a source of infection.,1.23E+18,na
+35,30,Medical advice and self-treatments,Blowing conch shells destroys coronavirus potency.,1.23E+18,na
+36,12,Medical advice and self-treatments,Methanol consumption cures or protects against coronavirus.,1.23E+18,na
+37,52,"Vaccines, medical treatments, and tests",Chloroquine is a Food and Drug Administration (FDA) approved treatment for COVID-19.,1.23E+18,na
+38,57,Community spread and impact,Swans and dolphins swimming in Venice canals following COVID-19 lockdown.,1.23E+18,na
+39,22,Medical advice and self-treatments,Cocaine cures coronavirus.,1.23E+18,na
+40,32,Community spread and impact,Observing janata curfew will result in the reduction of covid-19 cases by 40%.,1.23E+18,na
+41,61,"Public authority actions, policy, and communications",Lions were freed to keep people off the streets in Moscow.,1.23E+18,na
+42,40,Medical advice and self-treatments,Cannabis protects against COVID-19.,1.23E+18,na
+43,60,Community spread and impact,"A pod of humpback whales returned to the Arabian Sea offshore from Mumbai, India following the COVID-19 lockdown.",1.23E+18,na
+44,47,Claims about prominent actors,Actor Keith Lawrence Middlebrook has a cure for COVID-19.,1.23E+18,na
+45,33,Medical advice and self-treatments,Eating cabbage prevents coronavirus infection.,1.23E+18,na
+46,24,Medical advice and self-treatments,Coronavirus is cured by shuanghuanglian.,1.23E+18,na
+47,39,Medical advice and self-treatments,Salt water protects from coronavirus.,1.23E+18,na
+48,26,Claims about prominent actors,Kyriakos Velopoulos sells a hand cream which completely kills covid-19.,1.23E+18,na
+49,42,Medical advice and self-treatments,Vitamin D pills prevent COVID-19.,1.23E+18,na
+50,20,Medical advice and self-treatments,Vitamin D cures coronavirus.,1.23E+18,na
+51,46,Claims about prominent actors,Kenneth Copeland on Victory Channel can cure COVID-19 through the TV.,1.23E+18,na
+52,58,Community spread and impact,Water polution decreased in Venice canals following COVID-19 lockdown.,1.23E+18,na
+53,45,Medical advice and self-treatments,Alex Jones' silver-infused toothpaste kills COVID-19,1.23E+18,na
+54,6,Conspiracy theories,A decade-old map published by the World Population Project represents the 2020 coronavirus outbreak.,1.23E+18,na
+55,59,Community spread and impact,"A Malabar civet was spotted walking the streets of Meppayur, India following COVID-19 lockdown",1.23E+18,na
+56,34,Medical advice and self-treatments,"There is an ""anti-coronavirus"" mattress that could fight the coronavirus.",1.23E+18,na
+57,41,Medical advice and self-treatments,CBD oil is a cure for COVID-19.,1.23E+18,na
+58,62,Conspiracy theories,Bank of England £20 banknotes contain a picture of a 5G mast and the SARS-CoV-2 virus.,1.23E+18,na
+59,29,Medical advice and self-treatments,Clapping will kill coronavirus.,1.23E+18,na
+60,56,Other,"A pack of elephants descended on a village under quarantine in China's Yunnan, got drunk on corn wine, and passed out in a tea garden.
+.",1.23E+18,na
+61,16,Medical advice and self-treatments,Acetic acid is effective against coronavirus.,1.23E+18,na
