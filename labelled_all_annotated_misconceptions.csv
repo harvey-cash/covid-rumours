@@ -1,0 +1,443 @@
+,misconception_id,misconception,tweet_id,label,category
+0,3,Coronavirus is genetically engineered.,1.23393276710215e+18,pos,Conspiracy theories
+1,3,Coronavirus is genetically engineered.,1.23398288518462e+18,pos,Conspiracy theories
+2,3,Coronavirus is genetically engineered.,1.23394249457797e+18,pos,Conspiracy theories
+3,3,Coronavirus is genetically engineered.,1.23392078744017e+18,neg,Conspiracy theories
+4,3,Coronavirus is genetically engineered.,1.23394466107462e+18,pos,Conspiracy theories
+5,3,Coronavirus is genetically engineered.,1.23393248040895e+18,pos,Conspiracy theories
+6,3,Coronavirus is genetically engineered.,1.23391227970537e+18,pos,Conspiracy theories
+7,3,Coronavirus is genetically engineered.,1.23393392985973e+18,pos,Conspiracy theories
+8,3,Coronavirus is genetically engineered.,1.23393966854412e+18,pos,Conspiracy theories
+9,3,Coronavirus is genetically engineered.,1.23394186859928e+18,pos,Conspiracy theories
+10,3,Coronavirus is genetically engineered.,1.23394197811254e+18,pos,Conspiracy theories
+11,3,Coronavirus is genetically engineered.,1.23392630940498e+18,pos,Conspiracy theories
+12,3,Coronavirus is genetically engineered.,1.23391216760852e+18,pos,Conspiracy theories
+13,3,Coronavirus is genetically engineered.,1.23392235030915e+18,pos,Conspiracy theories
+14,3,Coronavirus is genetically engineered.,1.23390849797844e+18,pos,Conspiracy theories
+15,3,Coronavirus is genetically engineered.,1.23393845613026e+18,pos,Conspiracy theories
+16,3,Coronavirus is genetically engineered.,1.2339598955585e+18,neg,Conspiracy theories
+17,3,Coronavirus is genetically engineered.,1.23391555541063e+18,pos,Conspiracy theories
+18,3,Coronavirus is genetically engineered.,1.23391820008722e+18,pos,Conspiracy theories
+19,3,Coronavirus is genetically engineered.,1.23394319311433e+18,pos,Conspiracy theories
+20,3,Coronavirus is genetically engineered.,1.2339574524518e+18,pos,Conspiracy theories
+21,3,Coronavirus is genetically engineered.,1.23399280709156e+18,neg,Conspiracy theories
+22,3,Coronavirus is genetically engineered.,1.23393803615032e+18,pos,Conspiracy theories
+23,3,Coronavirus is genetically engineered.,1.23391565353652e+18,pos,Conspiracy theories
+24,3,Coronavirus is genetically engineered.,1.23399062378027e+18,pos,Conspiracy theories
+25,3,Coronavirus is genetically engineered.,1.23393423005849e+18,neg,Conspiracy theories
+26,3,Coronavirus is genetically engineered.,1.23393773983946e+18,pos,Conspiracy theories
+27,3,Coronavirus is genetically engineered.,1.23393029520587e+18,pos,Conspiracy theories
+28,3,Coronavirus is genetically engineered.,1.23394530677934e+18,pos,Conspiracy theories
+29,3,Coronavirus is genetically engineered.,1.23390968473994e+18,pos,Conspiracy theories
+30,3,Coronavirus is genetically engineered.,1.23391531923378e+18,neg,Conspiracy theories
+31,3,Coronavirus is genetically engineered.,1.23399378079503e+18,pos,Conspiracy theories
+32,3,Coronavirus is genetically engineered.,1.23392789248631e+18,pos,Conspiracy theories
+33,3,Coronavirus is genetically engineered.,1.23391411739773e+18,neg,Conspiracy theories
+34,3,Coronavirus is genetically engineered.,1.23395547167501e+18,pos,Conspiracy theories
+35,3,Coronavirus is genetically engineered.,1.23391147134154e+18,pos,Conspiracy theories
+36,3,Coronavirus is genetically engineered.,1.23394646845892e+18,pos,Conspiracy theories
+37,3,Coronavirus is genetically engineered.,1.2339862241398e+18,pos,Conspiracy theories
+38,3,Coronavirus is genetically engineered.,1.23399218937558e+18,pos,Conspiracy theories
+39,3,Coronavirus is genetically engineered.,1.23390564415722e+18,pos,Conspiracy theories
+40,3,Coronavirus is genetically engineered.,1.23394353129251e+18,pos,Conspiracy theories
+41,3,Coronavirus is genetically engineered.,1.23399284997418e+18,neg,Conspiracy theories
+42,3,Coronavirus is genetically engineered.,1.23398007950564e+18,pos,Conspiracy theories
+43,3,Coronavirus is genetically engineered.,1.23394128899659e+18,neg,Conspiracy theories
+44,3,Coronavirus is genetically engineered.,1.2339317585271e+18,neg,Conspiracy theories
+45,3,Coronavirus is genetically engineered.,1.23391041337023e+18,neg,Conspiracy theories
+46,3,Coronavirus is genetically engineered.,1.23390745039225e+18,pos,Conspiracy theories
+47,3,Coronavirus is genetically engineered.,1.23396309012491e+18,pos,Conspiracy theories
+48,3,Coronavirus is genetically engineered.,1.23392455371125e+18,pos,Conspiracy theories
+49,3,Coronavirus is genetically engineered.,1.23394690049734e+18,pos,Conspiracy theories
+50,3,Coronavirus is genetically engineered.,1.23392017741198e+18,pos,Conspiracy theories
+51,3,Coronavirus is genetically engineered.,1.23398273090549e+18,pos,Conspiracy theories
+52,11,Viruses are wastes from cells that are poisoned by electromagnetic fields.,1.2339317585271e+18,neg,Virus origin and properties
+53,11,Viruses are wastes from cells that are poisoned by electromagnetic fields.,1.23395628348681e+18,neg,Virus origin and properties
+54,11,Viruses are wastes from cells that are poisoned by electromagnetic fields.,1.23398276384341e+18,neg,Virus origin and properties
+55,11,Viruses are wastes from cells that are poisoned by electromagnetic fields.,1.23390706069116e+18,neg,Virus origin and properties
+56,11,Viruses are wastes from cells that are poisoned by electromagnetic fields.,1.23398954075649e+18,neg,Virus origin and properties
+57,1,A person can tell if they have coronavirus or not simply by holding their breath.,1.23394733433502e+18,pos,Medical advice and self-treatments
+58,1,A person can tell if they have coronavirus or not simply by holding their breath.,1.23395775410201e+18,neg,Medical advice and self-treatments
+59,1,A person can tell if they have coronavirus or not simply by holding their breath.,1.23397455635375e+18,neg,Medical advice and self-treatments
+60,50,It is safe for individuals infected with COVID-19 to go to work.,1.23393142935391e+18,neg,Virus transmission
+61,50,It is safe for individuals infected with COVID-19 to go to work.,1.23397624103362e+18,neg,Virus transmission
+62,15,Coronavirus can only survive in cold temperatures.,1.23397959461872e+18,pos,Virus origin and properties
+63,15,Coronavirus can only survive in cold temperatures.,1.23398532746912e+18,pos,Virus origin and properties
+64,15,Coronavirus can only survive in cold temperatures.,1.23396810412995e+18,pos,Virus origin and properties
+65,15,Coronavirus can only survive in cold temperatures.,1.23398226609278e+18,pos,Virus origin and properties
+66,15,Coronavirus can only survive in cold temperatures.,1.23396230781995e+18,pos,Virus origin and properties
+67,15,Coronavirus can only survive in cold temperatures.,1.23397642521807e+18,pos,Virus origin and properties
+68,15,Coronavirus can only survive in cold temperatures.,1.23394734486711e+18,pos,Virus origin and properties
+69,15,Coronavirus can only survive in cold temperatures.,1.23396646510937e+18,pos,Virus origin and properties
+70,15,Coronavirus can only survive in cold temperatures.,1.23397698008258e+18,pos,Virus origin and properties
+71,15,Coronavirus can only survive in cold temperatures.,1.23397205404866e+18,pos,Virus origin and properties
+72,15,Coronavirus can only survive in cold temperatures.,1.23392047546763e+18,pos,Virus origin and properties
+73,15,Coronavirus can only survive in cold temperatures.,1.23394087438146e+18,pos,Virus origin and properties
+74,15,Coronavirus can only survive in cold temperatures.,1.23397811964141e+18,neg,Virus origin and properties
+75,15,Coronavirus can only survive in cold temperatures.,1.23390838978617e+18,pos,Virus origin and properties
+76,15,Coronavirus can only survive in cold temperatures.,1.23392377031172e+18,pos,Virus origin and properties
+77,15,Coronavirus can only survive in cold temperatures.,1.23398107470058e+18,pos,Virus origin and properties
+78,15,Coronavirus can only survive in cold temperatures.,1.23392183026557e+18,neg,Virus origin and properties
+79,15,Coronavirus can only survive in cold temperatures.,1.23397480973997e+18,pos,Virus origin and properties
+80,15,Coronavirus can only survive in cold temperatures.,1.23395206998949e+18,pos,Virus origin and properties
+81,15,Coronavirus can only survive in cold temperatures.,1.23397359152967e+18,pos,Virus origin and properties
+82,15,Coronavirus can only survive in cold temperatures.,1.23396222502026e+18,pos,Virus origin and properties
+83,15,Coronavirus can only survive in cold temperatures.,1.23396441846505e+18,pos,Virus origin and properties
+84,15,Coronavirus can only survive in cold temperatures.,1.23399508809671e+18,pos,Virus origin and properties
+85,15,Coronavirus can only survive in cold temperatures.,1.23397168801181e+18,pos,Virus origin and properties
+86,15,Coronavirus can only survive in cold temperatures.,1.23395059326743e+18,pos,Virus origin and properties
+87,15,Coronavirus can only survive in cold temperatures.,1.23397154701622e+18,neg,Virus origin and properties
+88,15,Coronavirus can only survive in cold temperatures.,1.23398565750193e+18,pos,Virus origin and properties
+89,15,Coronavirus can only survive in cold temperatures.,1.23398886738621e+18,neg,Virus origin and properties
+90,15,Coronavirus can only survive in cold temperatures.,1.23399331453546e+18,pos,Virus origin and properties
+91,15,Coronavirus can only survive in cold temperatures.,1.23396998134961e+18,pos,Virus origin and properties
+92,15,Coronavirus can only survive in cold temperatures.,1.2339213788748e+18,pos,Virus origin and properties
+93,15,Coronavirus can only survive in cold temperatures.,1.23398498686224e+18,neg,Virus origin and properties
+94,15,Coronavirus can only survive in cold temperatures.,1.23392440258623e+18,pos,Virus origin and properties
+95,15,Coronavirus can only survive in cold temperatures.,1.23391725302584e+18,pos,Virus origin and properties
+96,15,Coronavirus can only survive in cold temperatures.,1.23397337679814e+18,pos,Virus origin and properties
+97,15,Coronavirus can only survive in cold temperatures.,1.23397284449894e+18,pos,Virus origin and properties
+98,15,Coronavirus can only survive in cold temperatures.,1.23393447199033e+18,pos,Virus origin and properties
+99,23,SARS-CoV-2 can survive for weeks on surfaces.,1.2339817971696e+18,pos,Virus origin and properties
+100,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392698274584e+18,pos,Virus origin and properties
+101,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23396278295929e+18,pos,Virus origin and properties
+102,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23394411270286e+18,pos,Virus origin and properties
+103,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23398185407366e+18,neg,Virus origin and properties
+104,23,SARS-CoV-2 can survive for weeks on surfaces.,1.2339636040696e+18,pos,Virus origin and properties
+105,23,SARS-CoV-2 can survive for weeks on surfaces.,1.2339578261559e+18,pos,Virus origin and properties
+106,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23393100012997e+18,pos,Virus origin and properties
+107,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23396036968675e+18,pos,Virus origin and properties
+108,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23397532997204e+18,pos,Virus origin and properties
+109,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392440258623e+18,pos,Virus origin and properties
+110,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23390638971149e+18,neg,Virus origin and properties
+111,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23395845878686e+18,pos,Virus origin and properties
+112,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23399108937322e+18,pos,Virus origin and properties
+113,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23397975387246e+18,pos,Virus origin and properties
+114,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392850023256e+18,pos,Virus origin and properties
+115,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392366818446e+18,pos,Virus origin and properties
+116,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23396378159791e+18,pos,Virus origin and properties
+117,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23391965634538e+18,pos,Virus origin and properties
+118,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23390694523866e+18,pos,Virus origin and properties
+119,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23393327810244e+18,pos,Virus origin and properties
+120,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392784212926e+18,pos,Virus origin and properties
+121,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23398886738621e+18,pos,Virus origin and properties
+122,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392183026557e+18,pos,Virus origin and properties
+123,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23390700226868e+18,pos,Virus origin and properties
+124,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23399241784767e+18,pos,Virus origin and properties
+125,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23394635219264e+18,pos,Virus origin and properties
+126,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23397811964141e+18,pos,Virus origin and properties
+127,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23393547853513e+18,pos,Virus origin and properties
+128,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23391274627994e+18,pos,Virus origin and properties
+129,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23398140985916e+18,neg,Virus origin and properties
+130,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23396991887131e+18,pos,Virus origin and properties
+131,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23398607878218e+18,pos,Virus origin and properties
+132,23,SARS-CoV-2 can survive for weeks on surfaces.,1.2339812929303e+18,neg,Virus origin and properties
+133,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23391201045623e+18,pos,Virus origin and properties
+134,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23390923014026e+18,pos,Virus origin and properties
+135,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23390897369643e+18,pos,Virus origin and properties
+136,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392946444426e+18,pos,Virus origin and properties
+137,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23390553398948e+18,pos,Virus origin and properties
+138,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23394022659219e+18,pos,Virus origin and properties
+139,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23394085044436e+18,pos,Virus origin and properties
+140,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23395575969777e+18,pos,Virus origin and properties
+141,23,SARS-CoV-2 can survive for weeks on surfaces.,1.2339694746693e+18,pos,Virus origin and properties
+142,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23394809704826e+18,pos,Virus origin and properties
+143,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23394456364911e+18,pos,Virus origin and properties
+144,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23397536436556e+18,pos,Virus origin and properties
+145,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23396423012823e+18,neg,Virus origin and properties
+146,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23398073313339e+18,pos,Virus origin and properties
+147,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392680197562e+18,pos,Virus origin and properties
+148,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23399245626749e+18,neg,Virus origin and properties
+149,23,SARS-CoV-2 can survive for weeks on surfaces.,1.2339930663541e+18,pos,Virus origin and properties
+150,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23396946863789e+18,pos,Virus origin and properties
+151,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23391120924768e+18,neg,Virus origin and properties
+152,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23399265822735e+18,pos,Virus origin and properties
+153,23,SARS-CoV-2 can survive for weeks on surfaces.,1.23392221738321e+18,pos,Virus origin and properties
+154,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23396778321554e+18,pos,Conspiracy theories
+155,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23396822134002e+18,pos,Conspiracy theories
+156,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23392678355835e+18,pos,Conspiracy theories
+157,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23392567247467e+18,pos,Conspiracy theories
+158,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.2339135887814e+18,pos,Conspiracy theories
+159,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23396330697466e+18,pos,Conspiracy theories
+160,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23394889205356e+18,pos,Conspiracy theories
+161,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23392288120731e+18,neg,Conspiracy theories
+162,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23394504817094e+18,neg,Conspiracy theories
+163,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23392319651819e+18,pos,Conspiracy theories
+164,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23395748077167e+18,pos,Conspiracy theories
+165,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23392250566191e+18,pos,Conspiracy theories
+166,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23397379479821e+18,pos,Conspiracy theories
+167,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23394921225095e+18,pos,Conspiracy theories
+168,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23395437627806e+18,pos,Conspiracy theories
+169,4,Dean Koontz predicted the pandemic in his 1981 novel The Eyes of Darkness.,1.23395378642048e+18,pos,Conspiracy theories
+170,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23393405293717e+18,neg,Medical advice and self-treatments
+171,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23392460199171e+18,pos,Medical advice and self-treatments
+172,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23397535222722e+18,pos,Medical advice and self-treatments
+173,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23396120749066e+18,pos,Medical advice and self-treatments
+174,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23395465134875e+18,pos,Medical advice and self-treatments
+175,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23399521684099e+18,neg,Medical advice and self-treatments
+176,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23391718259106e+18,pos,Medical advice and self-treatments
+177,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23395482134402e+18,neg,Medical advice and self-treatments
+178,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23398981637266e+18,neg,Medical advice and self-treatments
+179,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23394087245606e+18,neg,Medical advice and self-treatments
+180,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23393350661673e+18,neg,Medical advice and self-treatments
+181,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23397213644591e+18,pos,Medical advice and self-treatments
+182,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23397284667156e+18,neg,Medical advice and self-treatments
+183,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23390595833159e+18,neg,Medical advice and self-treatments
+184,14,Hand sanitiser sold commercially does not destroy the coronavirus.,1.23391659306047e+18,neg,Medical advice and self-treatments
+185,10,Coronavirus is caused by 5G.,1.23398987495013e+18,pos,Conspiracy theories
+186,10,Coronavirus is caused by 5G.,1.23398399986685e+18,pos,Conspiracy theories
+187,10,Coronavirus is caused by 5G.,1.23398349121522e+18,pos,Conspiracy theories
+188,10,Coronavirus is caused by 5G.,1.23391489854923e+18,pos,Conspiracy theories
+189,10,Coronavirus is caused by 5G.,1.23396655778251e+18,pos,Conspiracy theories
+190,10,Coronavirus is caused by 5G.,1.23393723504258e+18,pos,Conspiracy theories
+191,10,Coronavirus is caused by 5G.,1.23396883680356e+18,pos,Conspiracy theories
+192,10,Coronavirus is caused by 5G.,1.23395349849406e+18,pos,Conspiracy theories
+193,10,Coronavirus is caused by 5G.,1.23396083131169e+18,pos,Conspiracy theories
+194,10,Coronavirus is caused by 5G.,1.23393509616548e+18,neg,Conspiracy theories
+195,10,Coronavirus is caused by 5G.,1.23398172019571e+18,neg,Conspiracy theories
+196,10,Coronavirus is caused by 5G.,1.23395371522617e+18,pos,Conspiracy theories
+197,10,Coronavirus is caused by 5G.,1.23394865106552e+18,pos,Conspiracy theories
+198,10,Coronavirus is caused by 5G.,1.23394426404592e+18,pos,Conspiracy theories
+199,10,Coronavirus is caused by 5G.,1.2339286429645e+18,neg,Conspiracy theories
+200,10,Coronavirus is caused by 5G.,1.2339752062654e+18,pos,Conspiracy theories
+201,51,COVID-19 is only as deadly as the seasonal flu.,1.23395372402588e+18,pos,Virus origin and properties
+202,51,COVID-19 is only as deadly as the seasonal flu.,1.23393315168212e+18,neg,Virus origin and properties
+203,51,COVID-19 is only as deadly as the seasonal flu.,1.23393976947575e+18,neg,Virus origin and properties
+204,51,COVID-19 is only as deadly as the seasonal flu.,1.23398183207872e+18,neg,Virus origin and properties
+205,51,COVID-19 is only as deadly as the seasonal flu.,1.23393969625996e+18,neg,Virus origin and properties
+206,51,COVID-19 is only as deadly as the seasonal flu.,1.23396972614298e+18,pos,Virus origin and properties
+207,51,COVID-19 is only as deadly as the seasonal flu.,1.23399498451431e+18,pos,Virus origin and properties
+208,51,COVID-19 is only as deadly as the seasonal flu.,1.2339281200523e+18,neg,Virus origin and properties
+209,51,COVID-19 is only as deadly as the seasonal flu.,1.23397000223708e+18,neg,Virus origin and properties
+210,51,COVID-19 is only as deadly as the seasonal flu.,1.23396224409589e+18,neg,Virus origin and properties
+211,51,COVID-19 is only as deadly as the seasonal flu.,1.23394840725492e+18,neg,Virus origin and properties
+212,51,COVID-19 is only as deadly as the seasonal flu.,1.23393934867803e+18,pos,Virus origin and properties
+213,51,COVID-19 is only as deadly as the seasonal flu.,1.23395331326089e+18,neg,Virus origin and properties
+214,51,COVID-19 is only as deadly as the seasonal flu.,1.23393479745567e+18,neg,Virus origin and properties
+215,51,COVID-19 is only as deadly as the seasonal flu.,1.23393445723894e+18,neg,Virus origin and properties
+216,51,COVID-19 is only as deadly as the seasonal flu.,1.23396757718702e+18,neg,Virus origin and properties
+217,51,COVID-19 is only as deadly as the seasonal flu.,1.23391877531923e+18,pos,Virus origin and properties
+218,51,COVID-19 is only as deadly as the seasonal flu.,1.23396163658874e+18,neg,Virus origin and properties
+219,51,COVID-19 is only as deadly as the seasonal flu.,1.23393020706252e+18,pos,Virus origin and properties
+220,51,COVID-19 is only as deadly as the seasonal flu.,1.23397648856899e+18,pos,Virus origin and properties
+221,51,COVID-19 is only as deadly as the seasonal flu.,1.23397172990449e+18,neg,Virus origin and properties
+222,51,COVID-19 is only as deadly as the seasonal flu.,1.23393410472028e+18,neg,Virus origin and properties
+223,51,COVID-19 is only as deadly as the seasonal flu.,1.23391226658578e+18,neg,Virus origin and properties
+224,51,COVID-19 is only as deadly as the seasonal flu.,1.2339319744291e+18,neg,Virus origin and properties
+225,51,COVID-19 is only as deadly as the seasonal flu.,1.23397517385589e+18,neg,Virus origin and properties
+226,51,COVID-19 is only as deadly as the seasonal flu.,1.23394126095767e+18,pos,Virus origin and properties
+227,51,COVID-19 is only as deadly as the seasonal flu.,1.23397451819809e+18,neg,Virus origin and properties
+228,51,COVID-19 is only as deadly as the seasonal flu.,1.23397925058115e+18,neg,Virus origin and properties
+229,51,COVID-19 is only as deadly as the seasonal flu.,1.23396837367703e+18,neg,Virus origin and properties
+230,51,COVID-19 is only as deadly as the seasonal flu.,1.23395356994806e+18,neg,Virus origin and properties
+231,51,COVID-19 is only as deadly as the seasonal flu.,1.23392743399417e+18,neg,Virus origin and properties
+232,51,COVID-19 is only as deadly as the seasonal flu.,1.23393536195871e+18,neg,Virus origin and properties
+233,51,COVID-19 is only as deadly as the seasonal flu.,1.23394687975219e+18,pos,Virus origin and properties
+234,51,COVID-19 is only as deadly as the seasonal flu.,1.23395094475011e+18,neg,Virus origin and properties
+235,51,COVID-19 is only as deadly as the seasonal flu.,1.2339173197698e+18,neg,Virus origin and properties
+236,51,COVID-19 is only as deadly as the seasonal flu.,1.23393627583457e+18,neg,Virus origin and properties
+237,51,COVID-19 is only as deadly as the seasonal flu.,1.23395132201501e+18,pos,Virus origin and properties
+238,51,COVID-19 is only as deadly as the seasonal flu.,1.2339238439887e+18,neg,Virus origin and properties
+239,51,COVID-19 is only as deadly as the seasonal flu.,1.2339147903486e+18,pos,Virus origin and properties
+240,51,COVID-19 is only as deadly as the seasonal flu.,1.2339813258053e+18,neg,Virus origin and properties
+241,51,COVID-19 is only as deadly as the seasonal flu.,1.23396378009635e+18,neg,Virus origin and properties
+242,51,COVID-19 is only as deadly as the seasonal flu.,1.23395009510582e+18,neg,Virus origin and properties
+243,51,COVID-19 is only as deadly as the seasonal flu.,1.23392955815747e+18,pos,Virus origin and properties
+244,51,COVID-19 is only as deadly as the seasonal flu.,1.23396301107474e+18,neg,Virus origin and properties
+245,51,COVID-19 is only as deadly as the seasonal flu.,1.2339107476269e+18,neg,Virus origin and properties
+246,51,COVID-19 is only as deadly as the seasonal flu.,1.23393119355452e+18,pos,Virus origin and properties
+247,51,COVID-19 is only as deadly as the seasonal flu.,1.23391686960787e+18,pos,Virus origin and properties
+248,51,COVID-19 is only as deadly as the seasonal flu.,1.2339198825107e+18,neg,Virus origin and properties
+249,51,COVID-19 is only as deadly as the seasonal flu.,1.23390586450493e+18,neg,Virus origin and properties
+250,51,COVID-19 is only as deadly as the seasonal flu.,1.23394061212403e+18,neg,Virus origin and properties
+251,51,COVID-19 is only as deadly as the seasonal flu.,1.23391767064427e+18,neg,Virus origin and properties
+252,51,COVID-19 is only as deadly as the seasonal flu.,1.23399364426639e+18,neg,Virus origin and properties
+253,51,COVID-19 is only as deadly as the seasonal flu.,1.23393264691441e+18,neg,Virus origin and properties
+254,51,COVID-19 is only as deadly as the seasonal flu.,1.23391353455312e+18,neg,Virus origin and properties
+255,51,COVID-19 is only as deadly as the seasonal flu.,1.23399095807882e+18,neg,Virus origin and properties
+256,51,COVID-19 is only as deadly as the seasonal flu.,1.23392670576659e+18,neg,Virus origin and properties
+257,51,COVID-19 is only as deadly as the seasonal flu.,1.2339865462037e+18,neg,Virus origin and properties
+258,51,COVID-19 is only as deadly as the seasonal flu.,1.23394698560381e+18,pos,Virus origin and properties
+259,51,COVID-19 is only as deadly as the seasonal flu.,1.23394751778132e+18,pos,Virus origin and properties
+260,51,COVID-19 is only as deadly as the seasonal flu.,1.23398203818263e+18,neg,Virus origin and properties
+261,51,COVID-19 is only as deadly as the seasonal flu.,1.23395453845494e+18,pos,Virus origin and properties
+262,51,COVID-19 is only as deadly as the seasonal flu.,1.2339847657092e+18,neg,Virus origin and properties
+263,51,COVID-19 is only as deadly as the seasonal flu.,1.23391981336334e+18,neg,Virus origin and properties
+264,51,COVID-19 is only as deadly as the seasonal flu.,1.23392542913793e+18,pos,Virus origin and properties
+265,51,COVID-19 is only as deadly as the seasonal flu.,1.23397574499024e+18,pos,Virus origin and properties
+266,51,COVID-19 is only as deadly as the seasonal flu.,1.23399428093227e+18,neg,Virus origin and properties
+267,51,COVID-19 is only as deadly as the seasonal flu.,1.23395562799659e+18,neg,Virus origin and properties
+268,51,COVID-19 is only as deadly as the seasonal flu.,1.23394201826463e+18,pos,Virus origin and properties
+269,51,COVID-19 is only as deadly as the seasonal flu.,1.23398213330513e+18,neg,Virus origin and properties
+270,51,COVID-19 is only as deadly as the seasonal flu.,1.23395437342174e+18,pos,Virus origin and properties
+271,51,COVID-19 is only as deadly as the seasonal flu.,1.23392849984669e+18,neg,Virus origin and properties
+272,51,COVID-19 is only as deadly as the seasonal flu.,1.23394694428593e+18,neg,Virus origin and properties
+273,49,We're very close to a vaccine.,1.23392269472855e+18,pos,"Vaccines, medical treatments, and tests"
+274,49,We're very close to a vaccine.,1.23394690202411e+18,pos,"Vaccines, medical treatments, and tests"
+275,49,We're very close to a vaccine.,1.23392461207919e+18,neg,"Vaccines, medical treatments, and tests"
+276,49,We're very close to a vaccine.,1.23398286191873e+18,pos,"Vaccines, medical treatments, and tests"
+277,49,We're very close to a vaccine.,1.23390567028349e+18,neg,"Vaccines, medical treatments, and tests"
+278,49,We're very close to a vaccine.,1.23397085925522e+18,neg,"Vaccines, medical treatments, and tests"
+279,49,We're very close to a vaccine.,1.23394224155242e+18,pos,"Vaccines, medical treatments, and tests"
+280,49,We're very close to a vaccine.,1.233966301024e+18,pos,"Vaccines, medical treatments, and tests"
+281,49,We're very close to a vaccine.,1.23396924417555e+18,neg,"Vaccines, medical treatments, and tests"
+282,49,We're very close to a vaccine.,1.23398914788031e+18,neg,"Vaccines, medical treatments, and tests"
+283,49,We're very close to a vaccine.,1.23392018049064e+18,pos,"Vaccines, medical treatments, and tests"
+284,49,We're very close to a vaccine.,1.23394718798739e+18,pos,"Vaccines, medical treatments, and tests"
+285,49,We're very close to a vaccine.,1.23394710010009e+18,neg,"Vaccines, medical treatments, and tests"
+286,49,We're very close to a vaccine.,1.23398684168397e+18,pos,"Vaccines, medical treatments, and tests"
+287,49,We're very close to a vaccine.,1.23396786638009e+18,neg,"Vaccines, medical treatments, and tests"
+288,49,We're very close to a vaccine.,1.23392761598932e+18,neg,"Vaccines, medical treatments, and tests"
+289,49,We're very close to a vaccine.,1.23392158935749e+18,pos,"Vaccines, medical treatments, and tests"
+290,49,We're very close to a vaccine.,1.2339585454328e+18,pos,"Vaccines, medical treatments, and tests"
+291,49,We're very close to a vaccine.,1.23395471323166e+18,pos,"Vaccines, medical treatments, and tests"
+292,49,We're very close to a vaccine.,1.23394522392083e+18,neg,"Vaccines, medical treatments, and tests"
+293,49,We're very close to a vaccine.,1.23395066260331e+18,pos,"Vaccines, medical treatments, and tests"
+294,49,We're very close to a vaccine.,1.23391987438213e+18,neg,"Vaccines, medical treatments, and tests"
+295,49,We're very close to a vaccine.,1.23398791412997e+18,pos,"Vaccines, medical treatments, and tests"
+296,49,We're very close to a vaccine.,1.23390582733502e+18,neg,"Vaccines, medical treatments, and tests"
+297,49,We're very close to a vaccine.,1.23397187542598e+18,neg,"Vaccines, medical treatments, and tests"
+298,19,Vitamin C cures coronavirus.,1.23396824900977e+18,pos,Medical advice and self-treatments
+299,19,Vitamin C cures coronavirus.,1.23399474788009e+18,pos,Medical advice and self-treatments
+300,19,Vitamin C cures coronavirus.,1.23399435073825e+18,pos,Medical advice and self-treatments
+301,19,Vitamin C cures coronavirus.,1.23392498191184e+18,neg,Medical advice and self-treatments
+302,19,Vitamin C cures coronavirus.,1.23e+18,pos,Medical advice and self-treatments
+303,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23398339449476e+18,pos,Medical advice and self-treatments
+304,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23394622794075e+18,pos,Medical advice and self-treatments
+305,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397381870163e+18,pos,Medical advice and self-treatments
+306,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23399395042544e+18,pos,Medical advice and self-treatments
+307,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396816849159e+18,pos,Medical advice and self-treatments
+308,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23398343742348e+18,pos,Medical advice and self-treatments
+309,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396952836481e+18,pos,Medical advice and self-treatments
+310,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.233946040128e+18,pos,Medical advice and self-treatments
+311,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396423470421e+18,pos,Medical advice and self-treatments
+312,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397533200224e+18,pos,Medical advice and self-treatments
+313,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23398329399501e+18,pos,Medical advice and self-treatments
+314,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396073061908e+18,pos,Medical advice and self-treatments
+315,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396416136675e+18,pos,Medical advice and self-treatments
+316,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23394714308337e+18,pos,Medical advice and self-treatments
+317,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23395089602489e+18,pos,Medical advice and self-treatments
+318,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23394749116844e+18,pos,Medical advice and self-treatments
+319,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396308070019e+18,pos,Medical advice and self-treatments
+320,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23395246118402e+18,pos,Medical advice and self-treatments
+321,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397432615782e+18,pos,Medical advice and self-treatments
+322,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23399332597749e+18,pos,Medical advice and self-treatments
+323,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396484495866e+18,pos,Medical advice and self-treatments
+324,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23395457245818e+18,pos,Medical advice and self-treatments
+325,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23398572085284e+18,pos,Medical advice and self-treatments
+326,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.233943136768e+18,pos,Medical advice and self-treatments
+327,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397798802427e+18,pos,Medical advice and self-treatments
+328,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23398171339238e+18,pos,Medical advice and self-treatments
+329,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397553844157e+18,pos,Medical advice and self-treatments
+330,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23395342932582e+18,pos,Medical advice and self-treatments
+331,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23399368829824e+18,pos,Medical advice and self-treatments
+332,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396063675474e+18,pos,Medical advice and self-treatments
+333,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23399358176292e+18,pos,Medical advice and self-treatments
+334,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397396929803e+18,pos,Medical advice and self-treatments
+335,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397947581101e+18,pos,Medical advice and self-treatments
+336,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23394381531407e+18,pos,Medical advice and self-treatments
+337,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23397904325246e+18,pos,Medical advice and self-treatments
+338,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23395852164292e+18,pos,Medical advice and self-treatments
+339,27,Drinking cow urine and applying cow dung on the body can cure covid-19.,1.23396534851014e+18,pos,Medical advice and self-treatments
+340,5,The first person infected is a researcher named Huang Yanling.,1.23399039813086e+18,neg,Community spread and impact
+341,8,Vitamin C can prevent coronavirus circulation.,1.23390840288521e+18,pos,Medical advice and self-treatments
+342,8,Vitamin C can prevent coronavirus circulation.,1.23398971118784e+18,pos,Medical advice and self-treatments
+343,8,Vitamin C can prevent coronavirus circulation.,1.23393155124041e+18,neg,Medical advice and self-treatments
+344,8,Vitamin C can prevent coronavirus circulation.,1.23394639151844e+18,neg,Medical advice and self-treatments
+345,8,Vitamin C can prevent coronavirus circulation.,1.23396824900977e+18,pos,Medical advice and self-treatments
+346,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23394386076355e+18,pos,Community spread and impact
+347,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23397250787254e+18,pos,Community spread and impact
+348,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.2339785125975e+18,pos,Community spread and impact
+349,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23399396353261e+18,pos,Community spread and impact
+350,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.2339194848277e+18,neg,Community spread and impact
+351,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23397264710231e+18,pos,Community spread and impact
+352,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23394794011019e+18,pos,Community spread and impact
+353,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23398644589697e+18,pos,Community spread and impact
+354,53,"There were more than 50000 cremations in Wuhan for 4th Quarter, 2019 .",1.23391370976172e+18,pos,Community spread and impact
+355,48,There will be 500 deaths at the end of the pandemic.,1.23397620561693e+18,neg,Community spread and impact
+356,48,There will be 500 deaths at the end of the pandemic.,1.2339523503871e+18,neg,Community spread and impact
+357,48,There will be 500 deaths at the end of the pandemic.,1.23394837132214e+18,neg,Community spread and impact
+358,48,There will be 500 deaths at the end of the pandemic.,1.23392756278043e+18,neg,Community spread and impact
+359,48,There will be 500 deaths at the end of the pandemic.,1.2339657366007e+18,neg,Community spread and impact
+360,48,There will be 500 deaths at the end of the pandemic.,1.23395811016889e+18,neg,Community spread and impact
+361,48,There will be 500 deaths at the end of the pandemic.,1.23395868437352e+18,neg,Community spread and impact
+362,48,There will be 500 deaths at the end of the pandemic.,1.23398703402221e+18,neg,Community spread and impact
+363,48,There will be 500 deaths at the end of the pandemic.,1.23398400675829e+18,neg,Community spread and impact
+364,36,Chloroquine can cure coronavirus,1.2339173542178e+18,pos,Medical advice and self-treatments
+365,36,Chloroquine can cure coronavirus,1.23395405470058e+18,pos,Medical advice and self-treatments
+366,36,Chloroquine can cure coronavirus,1.23392105241946e+18,pos,Medical advice and self-treatments
+367,36,Chloroquine can cure coronavirus,1.23392819308357e+18,pos,Medical advice and self-treatments
+368,36,Chloroquine can cure coronavirus,1.23395888667737e+18,pos,Medical advice and self-treatments
+369,36,Chloroquine can cure coronavirus,1.23393513133908e+18,pos,Medical advice and self-treatments
+370,36,Chloroquine can cure coronavirus,1.233935785189e+18,pos,Medical advice and self-treatments
+371,36,Chloroquine can cure coronavirus,1.23392986512181e+18,pos,Medical advice and self-treatments
+372,36,Chloroquine can cure coronavirus,1.23392170686493e+18,pos,Medical advice and self-treatments
+373,44,Jim Bakker's colloidal silver solution is a remedy for COVID-19.,1.23393514696701e+18,pos,Medical advice and self-treatments
+374,44,Jim Bakker's colloidal silver solution is a remedy for COVID-19.,1.23397756365718e+18,pos,Medical advice and self-treatments
+375,44,Jim Bakker's colloidal silver solution is a remedy for COVID-19.,1.23396054528955e+18,pos,Medical advice and self-treatments
+376,25,Holy communion cannot be the cause of the spread of coronavirus,1.23397312828128e+18,neg,Virus transmission
+377,25,Holy communion cannot be the cause of the spread of coronavirus,1.2339926406618e+18,neg,Virus transmission
+378,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399268480253e+18,neg,Virus transmission
+379,25,Holy communion cannot be the cause of the spread of coronavirus,1.23390819192011e+18,pos,Virus transmission
+380,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399257787725e+18,neg,Virus transmission
+381,25,Holy communion cannot be the cause of the spread of coronavirus,1.23398858571767e+18,pos,Virus transmission
+382,25,Holy communion cannot be the cause of the spread of coronavirus,1.23393500085848e+18,neg,Virus transmission
+383,25,Holy communion cannot be the cause of the spread of coronavirus,1.2339636062339e+18,neg,Virus transmission
+384,25,Holy communion cannot be the cause of the spread of coronavirus,1.23395379995971e+18,neg,Virus transmission
+385,25,Holy communion cannot be the cause of the spread of coronavirus,1.2339625805757e+18,neg,Virus transmission
+386,25,Holy communion cannot be the cause of the spread of coronavirus,1.23398853213539e+18,pos,Virus transmission
+387,25,Holy communion cannot be the cause of the spread of coronavirus,1.23398235624928e+18,neg,Virus transmission
+388,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399536384721e+18,pos,Virus transmission
+389,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399257938301e+18,neg,Virus transmission
+390,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399257787307e+18,neg,Virus transmission
+391,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399361538029e+18,neg,Virus transmission
+392,25,Holy communion cannot be the cause of the spread of coronavirus,1.2339926490504e+18,neg,Virus transmission
+393,25,Holy communion cannot be the cause of the spread of coronavirus,1.23391818941698e+18,pos,Virus transmission
+394,25,Holy communion cannot be the cause of the spread of coronavirus,1.23392743630534e+18,neg,Virus transmission
+395,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399101060419e+18,neg,Virus transmission
+396,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399255980394e+18,neg,Virus transmission
+397,25,Holy communion cannot be the cause of the spread of coronavirus,1.23397542058159e+18,neg,Virus transmission
+398,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399179570245e+18,pos,Virus transmission
+399,25,Holy communion cannot be the cause of the spread of coronavirus,1.23392284136566e+18,neg,Virus transmission
+400,25,Holy communion cannot be the cause of the spread of coronavirus,1.2339883413492e+18,pos,Virus transmission
+401,25,Holy communion cannot be the cause of the spread of coronavirus,1.23398860559855e+18,pos,Virus transmission
+402,25,Holy communion cannot be the cause of the spread of coronavirus,1.23399264059467e+18,neg,Virus transmission
+403,25,Holy communion cannot be the cause of the spread of coronavirus,1.23398861685618e+18,pos,Virus transmission
+404,25,Holy communion cannot be the cause of the spread of coronavirus,1.23398853148538e+18,pos,Virus transmission
+405,25,Holy communion cannot be the cause of the spread of coronavirus,1.23398260898535e+18,neg,Virus transmission
+406,25,Holy communion cannot be the cause of the spread of coronavirus,1.23396467513137e+18,neg,Virus transmission
+407,54,The Simpsons predicted COVID-19 pandemic.,1.23392434011196e+18,pos,Conspiracy theories
+408,18,Essential oils cure coronavirus.,1.23393641945599e+18,pos,Medical advice and self-treatments
+409,18,Essential oils cure coronavirus.,1.23399474788009e+18,pos,Medical advice and self-treatments
+410,18,Essential oils cure coronavirus.,1.23399435073825e+18,pos,Medical advice and self-treatments
+411,17,Avocado and mint tea cures coronavirus.,1.23393766411134e+18,neg,Medical advice and self-treatments
+412,17,Avocado and mint tea cures coronavirus.,1.23396824900977e+18,pos,Medical advice and self-treatments
+413,2,Drinking large amounts of water will protect against coronavirus.,1.23398755299194e+18,pos,Medical advice and self-treatments
+414,2,Drinking large amounts of water will protect against coronavirus.,1.23399259012875e+18,pos,Medical advice and self-treatments
+415,2,Drinking large amounts of water will protect against coronavirus.,1.2339838889569e+18,pos,Medical advice and self-treatments
+416,2,Drinking large amounts of water will protect against coronavirus.,1.23394941939084e+18,pos,Medical advice and self-treatments
+417,35,Wearing shoes at one's home is the reason behind the spread of the coronavirus in italy.,1.23392910167041e+18,pos,Virus transmission
+418,7,Boiled ginger can cure coronavirus.,1.23393137415289e+18,pos,Medical advice and self-treatments
+419,7,Boiled ginger can cure coronavirus.,1.23390545238106e+18,pos,Medical advice and self-treatments
+420,28,Using namaste as a greeting prevents transmission of covid-19.,1.23399163931766e+18,pos,Virus transmission
+421,28,Using namaste as a greeting prevents transmission of covid-19.,1.23396171079855e+18,pos,Virus transmission
+422,28,Using namaste as a greeting prevents transmission of covid-19.,1.23399173329536e+18,pos,Virus transmission
+423,28,Using namaste as a greeting prevents transmission of covid-19.,1.23399175701399e+18,pos,Virus transmission
+424,31,The lifetime of SARS-CoV-2 is only 12 hours.,1.23395619976415e+18,neg,Virus origin and properties
+425,31,The lifetime of SARS-CoV-2 is only 12 hours.,1.23392680197562e+18,neg,Virus origin and properties
+426,31,The lifetime of SARS-CoV-2 is only 12 hours.,1.23397205404866e+18,pos,Virus origin and properties
+427,31,The lifetime of SARS-CoV-2 is only 12 hours.,1.23397306852099e+18,neg,Virus origin and properties
+428,9,Africans are more resistant to coronavirus.,1.2339125087061e+18,pos,Community spread and impact
+429,9,Africans are more resistant to coronavirus.,1.23396704036651e+18,pos,Community spread and impact
+430,9,Africans are more resistant to coronavirus.,1.23391261576995e+18,neg,Community spread and impact
+431,9,Africans are more resistant to coronavirus.,1.23392915486689e+18,pos,Community spread and impact
+432,38,Shaking hands cannot spread coronavirus.,1.23398620554233e+18,neg,Virus transmission
+433,21,Fennel tea cures coronavirus.,1.23393766411134e+18,neg,Medical advice and self-treatments
+434,21,Fennel tea cures coronavirus.,1.23396824900977e+18,pos,Medical advice and self-treatments
+435,55,Drinking Corona-brand beer causes COVID-19.,1.23393246561146e+18,neg,Virus transmission
+436,13,Whiskey and honey cure coronavirus.,1.23391668758752e+18,pos,Medical advice and self-treatments
+437,43,Miracle Mineral Suppliment (MMS) will prevent and cure COVID-19.,1.23399175701399e+18,neg,Medical advice and self-treatments
+438,37,Jamaat cannot become a source of infection.,1.23394914705051e+18,pos,Virus transmission
+439,30,Blowing conch shells destroys coronavirus potency.,1.23394767113768e+18,neg,Medical advice and self-treatments
+440,12,Methanol consumption cures or protects against coronavirus.,1.23394672663087e+18,neg,Medical advice and self-treatments
+441,52,Chloroquine is a Food and Drug Administration (FDA) approved treatment for COVID-19.,1.23397433102303e+18,pos,"Vaccines, medical treatments, and tests"
