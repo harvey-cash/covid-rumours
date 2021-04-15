@@ -55,7 +55,7 @@ def clean_preprocess(claim):
     """ Clean string of punctuation, stop words, etc.
     :param claim: dictionary of {doc_id, content, category}
     """
-    claim['content'] = preprocess_text.clean_all(claim['content'])
+    claim['content'] = preprocess_text.clean_str(claim['content'])
     return claim
 
 
