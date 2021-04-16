@@ -13,7 +13,7 @@ def search_for_terms(amount, claim_dict):
     """
 
     must_array = [{"match": {"is_a_retweet": "false"}}, {"match": {"is_a_quote": "false"}}]
-    should_array = [{"match": {"tweet_text": "*" + str([term, frequency]) + "*"}} for term, frequency in claim_dict.items()]
+    should_array = [{"match": {"tweet_text": "*" + term + "*"}} for term, frequency in claim_dict.items()]
 
     query_body = {
         "query": {
@@ -31,15 +31,14 @@ def search_for_terms(amount, claim_dict):
         },
         "collapse": {
             "field": "tweet_id.keyword"
-        }
+        },
+        "track_total_hits": True
     }
 
     result = elastic_client.search(index="covid19_misinfo_index", body=query_body, size=amount, request_timeout=999999,
                                    _source="tweet_id")  #
 
-    tweets = [doc["_source"]["tweet_id"] for doc in result['hits']['hits']]
-
-    return tweets
+    return [(doc["_source"]["tweet_id"], doc["_score"]) for doc in result['hits']['hits']]
 
 
 def random_rumours(amount, categories):
@@ -85,9 +84,6 @@ def random_rumours(amount, categories):
     for x in categories:
         for y in category_BOW[x]:  # input must be exactly the same as keys used in json
             should_array.append({"match": {"tweet_text": "*" + y + "*"}})
-            # this will change based on how the json is parsed - y[0] just needs to be the text, and y[1] the number of times that
-            # word appears in the bag. x[0] is the category input to the method, and x[1] is the number input to the method for that
-            # category (user boost)
 
     query_body = {
         "query": {
