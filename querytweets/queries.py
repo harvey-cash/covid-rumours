@@ -4,6 +4,44 @@ import json
 elastic_client = Elasticsearch(hosts=["http://143.167.8.152:9300"], http_auth=('students', 'foxtrot'))
 
 
+def search_for_terms(amount, claim_dict):
+    """
+    Search using a term_frequency dictionary
+    :param amount: integer number of tweets to return
+    :param claim_dict: dictionary of {term: frequency}s
+    :return: array of tweet IDs
+    """
+
+    must_array = [{"match": {"is_a_retweet": "false"}}, {"match": {"is_a_quote": "false"}}]
+    should_array = [{"match": {"tweet_text": "*" + str([term, frequency]) + "*"}} for term, frequency in claim_dict.items()]
+
+    query_body = {
+        "query": {
+            "bool": {
+                "must": must_array,
+                "must_not": [
+                    {"match": {"hashtags": "obamagate"}},
+                    {"exists": {"field": "in_reply_to_user_id"}},
+                    {"exists": {"field": "in_reply_to_status_id"}},
+                    {"exists": {"field": "in_reply_to_screen_name"}},
+                    {"match": {"message": "*media_url*"}}
+                ],
+                "should": should_array
+            }
+        },
+        "collapse": {
+            "field": "tweet_id.keyword"
+        }
+    }
+
+    result = elastic_client.search(index="covid19_misinfo_index", body=query_body, size=amount, request_timeout=999999,
+                                   _source="tweet_id")  #
+
+    tweets = [doc["_source"]["tweet_id"] for doc in result['hits']['hits']]
+
+    return tweets
+
+
 def random_rumours(amount, categories):
     #     #using hashtags
     #     public_authority_actions = []

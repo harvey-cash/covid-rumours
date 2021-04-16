@@ -40,28 +40,17 @@ function generateAnnotationForm(formName, tweetsToAnnotate, knownRumours, metaDa
       // Now set the choices for each question to navigate to the correct page
       var categoryQuestion = pages[i].question
 
-      // Create a choice for each category, which navigates to the claim page for that category
-      categoryQuestion.setChoices(pages[i].claimPages.map(claimPage => {
-        return categoryQuestion.createChoice(claimPage.category, claimPage.page)
-      }))
+      // Create a choice for each category
+      categoryQuestion.setChoiceValues(categories)
 
-      // For each claim page
-      for (let j = 0; j < pages[i].claimPages.length; j++) {
-        var claimPage = pages[i].claimPages[j]
+      var claimDict = pages[i].claimPageDict
 
-        // Skip to next tweet page or end of form if no more tweets!
-        var navigatePage = (i < pages.length - 1) ? pages[i+1].page : submitPage
-        claimPage.page.setGoToPage(navigatePage)
-
-        // Create claim shortlists
-        // ToDo: Filter by category
-        var shortlist = parseShortlist(pages[i].tweet, rumours, claimPage.category)
-        var choices = shortlist.map(r => { return "Claim #" + r.rumourID + ": " + r.description })
-        choices.push('Other: Claim not listed')
-        choices.push('Other: Does not discuss a claim')
-
-        claimPage.question.setChoiceValues(choices)
-      }
+      // Create claim shortlist
+      var shortlist = parseShortlist(pages[i].tweet, rumours)
+      var choices = shortlist.map(r => { return "Claim #" + r.rumourID + ": " + r.description })
+      choices.push('Other: Claim not listed')
+      choices.push('Other: Does not discuss a claim')
+      claimDict.question.setChoiceValues(choices)
     }
     
   }
@@ -144,29 +133,27 @@ function createFormPages(form, tweets) {
     categoryQuestion.setTitle("Tweet #" + (i+1) + ": Category")
     categoryQuestion.setHelpText("Which category does this Tweet primarily belong to?")
 
-    // For each category, present claim shortlist
-    var claimPages = categories.map(category => {
-      var claimPage = form.addPageBreakItem()
-      claimPage.setTitle("Claim Identification")
-      
-      // Tweet text
-      form.addSectionHeaderItem()
-        .setTitle(tweets[i].text)
+    // Present claim shortlist
+    var claimPage = form.addPageBreakItem()
+    claimPage.setTitle("Claim Identification")
+    
+    // Tweet text
+    form.addSectionHeaderItem()
+      .setTitle(tweets[i].text)
 
-      // Annotate claim
-      var claimQuestion = form.addMultipleChoiceItem()
-      claimQuestion.setTitle("Claims: " + category)
-      claimQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
+    // Annotate claim
+    var claimQuestion = form.addMultipleChoiceItem()
+    claimQuestion.setTitle("Claims: ")
+    claimQuestion.setHelpText("Which claim does this Tweet primarily discuss?")
 
-      return {"category": category, "page": claimPage, "question": claimQuestion} 
-    })
+    var claimPageDict = {"page": claimPage, "question": claimQuestion} 
     
     // Populate data structure
     pages.push({
       "tweet": tweets[i], 
       "page": categoryPage, 
       "question": categoryQuestion, 
-      "claimPages": claimPages
+      "claimPageDict": claimPageDict
     })
   }
 
@@ -231,7 +218,7 @@ function badlyFormattedParameters(formName, tweetsToAnnotate, knownRumours) {
 /**
  * Return a list of rumours for the given tweet, filtered by category
  */
-function parseShortlist(tweet, rumours, category) {
+function parseShortlist(tweet, rumours) {
   var shortlist = []
 
   // For each rumour in the shortlist...
@@ -240,8 +227,8 @@ function parseShortlist(tweet, rumours, category) {
     var rumourIDString = shortlistedIDs[i].toString()  
     var rumour = rumours[rumourIDString]; // Find the entry of the rumour
 
-    // Add if rumour exists and matches the category
-    if (rumour != null && rumour.category == category) { shortlist.push(rumour) }
+    // Add if rumour exists
+    if (rumour != null) { shortlist.push(rumour) }
   }
 
   return shortlist
