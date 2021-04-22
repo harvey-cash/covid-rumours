@@ -11,10 +11,10 @@ def construct_indices(categories, file_path="../RumourDatabase.csv"):
     :param file_path: path to CSV file of claims
     :return: a dictionary of category indices and dictionary of word: {doc_id: frequency} values
     """
-    return {category: category_index(category, file_path) for category in categories}
+    return {category: construct_index(category, file_path) for category in categories}
 
 
-def category_index(category, file_path="../RumourDatabase.csv"):
+def construct_index(category=None, file_path="../RumourDatabase.csv"):
     """
     :param file_path: path to CSV file of claims
     :param category: category to filter to
@@ -23,8 +23,9 @@ def category_index(category, file_path="../RumourDatabase.csv"):
     # Read CSV lines
     claims = parse_claims(file_path)  # List of {doc_id, content, category}
 
-    # Filter for category
-    claims = [claim for claim in claims if claim['category'] == category]
+    # Filter for category, if specified
+    if category is not None:
+        claims = [claim for claim in claims if claim['category'] == category]
 
     # Remove stop-words, punctuation, etc.
     claims = [clean_preprocess(claim) for claim in claims]
