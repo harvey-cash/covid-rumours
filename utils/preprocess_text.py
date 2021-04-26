@@ -40,7 +40,7 @@ def remove_non_alpha_chars(content_collection):
 
 
 def remove_non_alpha_chars_from_str(claim):
-    only_alpha = claim.replace(r'[_\W\d]',' ')
+    only_alpha = claim.replace(r'[\/_\W\d]',' ')
     return only_alpha.strip()
 
 

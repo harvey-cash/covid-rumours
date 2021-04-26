@@ -136,7 +136,7 @@ def text_from_id(ids):
         }
     }
 
-    result = elastic_client.search(index="covid19_misinfo_index", body=query_body, request_timeout=30000,
+    result = elastic_client.search(index="covid19_misinfo_index", body=query_body, request_timeout=999999,
                                    _source="tweet_text")
 
     all_hits = result['hits']['hits']
