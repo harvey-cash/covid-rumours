@@ -8,9 +8,32 @@ import gensim
 from nltk.tokenize import sent_tokenize
 from nltk.stem import WordNetLemmatizer
 
+db_stopwords = [
+    'iphoto',
+    'photo',
+    'photograph',
+    'foto',
+    'screenshot',
+    'ss',
+    'video',
+    'film',
+    'facebook',
+    'fb',
+    'twitter',
+    'instagram',
+    'insta',
+    'whatsapp',
+    'graphic',
+    'post',
+    'audio',
+    'clip',
+    'show',
+    'shown',
+]
 
 def remove_stopwords(content):
     stop_words = set(stopwords.words('english'))
+    stop_words.update(db_stopwords)
     word_tokens = word_tokenize(content)
     clean_content = [w.lower() for w in word_tokens if w.lower() not in stop_words]
     return clean_content
