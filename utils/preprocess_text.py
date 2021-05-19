@@ -60,7 +60,8 @@ def remove_small_terms(content):
 
 def remove_punctuation(content):
     re.sub(r'http\S+', '', content)
-    clean_content = [re.sub('[^0-9a-z]+','', w) for w in content]
+    word_tokens = word_tokenize(content)
+    clean_content = [re.sub('[^0-9a-z]+','', w) for w in word_tokens]
     # Removes additional space created because of removing punctuation
     clean_content = [w for w in clean_content if w.strip()]
     return clean_content
